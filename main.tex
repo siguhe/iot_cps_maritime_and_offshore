@@ -1,0 +1,98 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{csquotes}
+\usepackage[english]{babel}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{todonotes}
+\usepackage[toc, page]{appendix}
+\usepackage[final]{pdfpages}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{utopia}
+\usepackage{cite}
+
+\usepackage{amssymb} 
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{minted}
+\setminted{frame=lines}
+
+\usepackage{subcaption}
+\usepackage[squaren]{SIunits} % Provides SI units like \meter. The squaren option is due to a conflict with amssymb.
+\usepackage{graphicx} % Provides the \includegraphics command.
+\usepackage{booktabs} % Better tables. Provides \toprule, \midrule, \bottomrule.
+\usepackage{listings} % Provides source code listings.
+\usepackage{todonotes} % Provides several handy TODO commands.
+%\usepackage{subfig}
+\usepackage{tabularx} %table config
+\usepackage{colortbl} %table config
+\usepackage{graphicx}%table config 
+\usepackage{makecell}%table config
+\usepackage{float}%table config
+
+
+
+\DeclareUnicodeCharacter{2212}{-} %google said I should include 
+%% Front page
+\renewcommand{\baselinestretch}{1.15} 
+\begin{document}
+\begin{titlepage}
+      \begin{center}
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[scale=0.2]{Figurer/ntnu.png}
+            \label{fig:ntnu}
+        \end{figure} 
+        \vspace*{1cm}
+        {\Large{TTK4550}}\\[0.4cm] 
+        {\Large{\textit{Assessment of the exposure of publicly accessible cyber-physical systems }}}\\[0.5cm]
+        {\Huge{Pre-study report}}\\[0.5cm] 
+        {\Large{Sigurd Hellesvik}}\\[0.4cm] %%student numbers only, no names
+        \large{\today}
+        \vspace{1cm}
+    \end{center}
+    \vspace*{\fill}
+\end{titlepage}
+
+
+%% Table of contents
+\thispagestyle{empty} % Avoid page numbering on the table of contents.
+\linespread{1.15}
+\newpage
+\tableofcontents{}
+\def\tableofcontentsname{test}
+\thispagestyle{empty} % Avoid page numbering on the table of contents.
+
+
+%%% Main content %%%
+%\newpage
+\setcounter{page}{1}
+\input{intro}
+\input{project_desc}
+\input{literature}
+\input{shodan_search}
+\input{new}
+
+
+
+
+
+
+%% Appendix
+\newpage
+\begin{appendices} \label{appendix}
+\input{"appendix/project_announcement"}
+\input{"appendix/search_filters"}
+\end{appendices}
+
+
+%% References
+\newpage
+\bibliography{references}{}
+\bibliographystyle{plain}
+
+
+
+\end{document}

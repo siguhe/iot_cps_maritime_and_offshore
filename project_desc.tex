@@ -1,0 +1,45 @@
+\section{Project description} \label{sec:desc}
+
+\subsection{Cyber-Physical Systems(CPS)}\label{sec:cps}
+Cyber-Physical Systems(CPS) can be defined as "engineered systems that integrate information technologies, real‐time control subsystems, physical components, and human operators to influence physical processes by means of cooperative and (semi)automated control functions."~\cite{guzman_wied_kozine_lundteigen_2019}
+CPS is a broad term, and examples can be everything automated control systems at offshore platforms to the computer system in an electric car. As more and more of the CPSs are connected to the internet, cyber threats becomes a bigger challenge. 
+
+\subsection{Search engine} \label{sec:shodan}
+Shodan is a search engine like Google. Instead of searching for web pages, however, it will gather publicly-available information about all devices directly connected to the internet.~\cite{shodan} This makes Shodan ideal for mapping all CPSs that are connected to the internet. 
+Earlier in this pre-report, the search engine Shodan has been assumed used. This is not the only alternative, as other tools like \href{https://censys.io/}{\color{blue}{Censys}} and \href{www.zoomeye.org}{\color{blue}{ZoomEye}} have functionality similar to Shodan. It is, however, enough to use one of the engines. Shodan is chosen, since it is arguably the most popular choice, and therefore, more documentation and examples can be found. Another assessment of this choice can be made later, if found necessary. 
+
+\subsection{Constraints}\label{sec:constraints}
+Shodan will list a lot of different IP addresses and info about them. This will be to much for this project, so constraints have to be set. The factors that will decide the constraints will be Competence, Info Available and Relevance. While this type of project normally is reserved for Computer Science students, Sigurd is studying Cybernetics and Robotics. This could for example make meaningful to focus on industrial CPSs. In addition, the competence of the supervisors should be taken into accord. Mary Ann has worked Offshore, Mate has experience with cruise ships and Bálint work with power plants. This project will therefore focus on the Maritime and Offshore industries. With this constraints, too many results might still be present. To narrow the results some more, a reginal constraint will be set. Only CPSs in Europa will be concidered. Depending on how different CPS are implemented, different information might be available on Shodan. To get useful results, constraints will probably be set based on hardware and/or protocols. Research and testing will have to be done before these constraints eventually have to be set. The constraints may generally be changed later in the project, if the results prove to be too few or too many.
+
+\subsection{Project work}\label{sec:work}
+After the initial planning is done, the project work can begin. First, scripts will be written that use the Shodan API to gather data based on the constraints. Then different tools will be utilized to sort the information, and make it presentable. This could for example be heat maps to show geographic, graphs to compare results or infographics. If there is more time after this is done, the student might look into the actual security of the CPS mapped. To quote a suggestion from Mate: "This can include manual probing, targeted vulnerability scan of resulting IPs with OpenVAS". In that case, the student will first have to learn the techniques, then perform the testing.
+\newpage
+
+\section{Tentative plan}\label{sec:plan}
+ Sigurd will meet with Bálint once a week to discuss progress. Mate will be invited to these meetings, and sent a protocol afterwards. Sigurd will meet with Mary Ann every odd week. There is not yet any set time for these meetings. \\
+In the table, the individual tasks are planned finished before the corresponding date, which is always Thursdays. This means that work on the next step begins on Thursdays.
+\newline
+
+
+\begin{tabular}{|l|l|l|}
+\hline
+Week & Date & Tentative plan                                                                     \\ \hline
+Week 35 & 27.08.2020 & First draft pre-study report                                              \\ \hline
+Week 36 & 03.09.2020 & Finish pre-study report + research, aka find at least 3 relevant sources \\ \hline
+Week 37 & 10.09.2020 & Research(3 sources)                                                       \\ \hline
+Week 38 & 17.09.2020 & Get to know Shodan, also API                                              \\ \hline
+Week 39 & 24.09.2020 & Testing different constraints                                             \\ \hline
+Week 40 & 01.10.2020 & Deadline for deciding constraints                                         \\ \hline
+Week 41 & 08.10.2020 & Work on project                                                           \\ \hline
+Week 42 & 15.10.2020 & Work on project + some research                                           \\ \hline
+Week 43 & 22.10.2020 & Work on project                                                           \\ \hline
+Week 44 & 29.10.2020 & Work on project                                                           \\ \hline
+Week 45 & 05.11.2020 & Learn vulnerability scan (optional)                                       \\ \hline
+Week 46 & 12.11.2020 & Perform vulnerability scan (optional)                                     \\ \hline
+Week 47 & 19.11.2020 & Start writing the report, aka make all headlines + some keywords         \\ \hline
+Week 48 & 26.11.2020 & Finish keywords + visualize data + start writing                          \\ \hline
+Week 49 & 03.12.2020 & Finish first draft report + get feedback                                 \\ \hline
+Week 50 & 10.12.2020 & Finishing touches + make presentation                                     \\ \hline
+Week 51 & 17.12.2020 & Deadline                                                                  \\ \hline
+\end{tabular}
+

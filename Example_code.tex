@@ -1,0 +1,150 @@
+\section{Solution: Sigurd Hellesvik} \label{sec:Laturd}
+This part of the report will be written as a tutorial, where the reader should be able to follow all the steps in this part of the project. This tutorial makes it easier to maintain the project. It should also be possible to use any separate part of this tutorial for your own inventions, as this project is made up of many general concepts.
+
+
+\subsection{Database and Structured Query Language(SQL)}
+Omega Verksted has most of its components registered in a database. This makes it easy to get information about components, add new ones and register sales of components. This database uses the Structured Query Language (SQL),  one of the most commonly used database management languages. Database entries are sorted into categories and tables. OV has two different ways to interact with the database.  Before trying any of these, however, be very careful when interacting with the database, as accidental deletion of data will result in a lot of extra work. It is recommended to set up a test user before making siginificant changes. Please read \cref{sec:test_user} to see how that can be done. 
+
+First, the database has a graphical interface on a webpage: \url{https://www.omegav.no/phppgadmin/}. To log in here, you need to ask an OV board member. OV has many different subcategories of data in its database, like files for Altium, info for our webpage("extern") and data we use for normal operation("intern"). These are listed on the phpPgAdmin webpage. To access the different tables of data found here, we need to navigate through sub menus of the sub categories, to Schemas\textrightarrow public\textrightarrow Tables. In this graphical interface the information can be edited manually. To edit the information automatically, the database can be accessed in another way. Therefore it is not necessary to know very much about this webpage, but it is useful to know that it exists.
+
+The second way to interact with the database is by using the SQL language directly. It is assumed that the reader has a basic knowledge of programming. See \cref{sec:test_user} on how to get access to he database. OV uses PostgreSQL. Consequently, to interface the database from a computer terminal, use the "psql" command. It is necessary to specify some options: Set the host to "localhost", set username and set what database to use. See "psql --help" for all commands. For example:
+\begin{minted}{bash}
+    psql -h localhost -d intern_dev_slegge -U slegge
+\end{minted}
+
+Now SQL commands can be used. The commands relevant for this project are SELECT, UPDATE, INSERT INTO, BEGIN, ROLLBACK and COMMIT. SELECT returns data from the database. Use the FROM keyword to specify which table to return. To returned all data, use "*" instead of an identifier. To parse the data returned,  use WHERE to specify what elements the data should contain. AND and OR can also be used with WHERE to combine requirements. Remember to use semicolon.
+\begin{minted}{SQL}
+    --return all IDs in the component database
+    SELECT id FROM komp_komponenter; 
+    --return all information about the components, as a table
+    SELECT * FROM komp_komponenter; 
+    --return all IDs in the component database that cost 20
+    SELECT id FROM komp_komponenter WHERE pris = 20; 
+    --return all names of components that cost 20 and is updated by 1337
+    SELECT navn FROM komp_komponenter WHERE pris = 20 AND oppdatert_av = 1337;
+\end{minted}
+
+BEGIN sets a checkpoint in the database. Then no changes can go live before the COMMIT command is used. If anything goes wrong, for example every item in the database is deleted, simply use ROLLBACK. Everything will then return to how it was before BEGIN was used. Always use BEGIN+COMMIT/ROLLBACK when changing data in the database. It is very important to be aware that UPDATE and INSERT INTO will execute changes in the database. UPDATE first selects what table name to edit. Then the SET keyword to chooses how to edit the columns. The WHERE command also works here. 
+
+Finally, the INSERT INTO command adds an element to a table. Select the tables and the columns to insert information into, and then use the VALUE keyword to choose what values to insert. Columns which are not specified will get default values. These are the commands needed to interact with the database.
+
+\begin{minted}{SQL}
+    BEGIN; --set checkpoint
+    --Set the price of all components to 1000.
+    UPDATE komp_komponenter SET pris = 1000;  
+    --Set the price of all components which cost 20 to 1000.
+    UPDATE komp_komponenter SET pris = 1000 WHERE pris = 20; 
+    --Insert a component with id 1234 and price 20.
+    INSERT INTO komp_komponenter (id, pris) VALUES (1234, 20);
+    ROLLBACK; --undo changes
+\end{minted}
+
+\subsection{How to set up a test user for EDB development} \label{sec:test_user}
+The database of OV has a whitelist, allowing only clients with specified IP addresses to use it. To interface the database directly, use username@omegav.no. When implementing new features to a database, it is good practice to first use a test database. OV already has a number of such test databases. For example intern\_dev\_slegge and extern\_dev\_slegge. 
+Ask someone who is part of EDB, the IT department of OV, to set up a test user for you to be able to access the database. And then ask them again when you have completed your code, to get it live.
+
+
+
+
+\subsection{Application Programming Interface / API}
+\label{sec:api}
+As seen above, it is not straight forward to use the database. However, when a developer needs to use the database, it is most often just for searching in it or to update it in some way. This project is limited to searching for components and to buy them. To do this it should be sufficient to use only a simple function. To accomplish this, use an Application Programming Interface(API). Wikipedia defines an API as: "In computer programming, an application programming interface (API) is a set of subroutine definitions, communication protocols, and tools for building software. In general terms, it is a set of clearly defined methods of communication among various components.". An API can be compared to a waiter: When you order food at a restaurant, you do not order it directly from the chef. Instead you give your order to the waiter, then she brings it to the chef for you. Then your food is sent back from the chef to you by the waiter. 
+
+To access the API, OV has a web link that can be polled. So users of the API need only the link and a key to use it. OV already has an API for the component database, but it was not complete when this project started. In \cref{sec:vending_machine} it is shown how this was fixed. However, first it is necessary to go through the basics of PHP, since this is the programming language used to make the API here.
+
+
+\subsection{API programming in PHP} \label{sec:API_PHP}
+The code for the readymade API can be found at \url{https://git.omegav.no/ov/neokomp/tree/master/api}, and it might be useful to look at this when reading the following sections. This is just a copy of the live API which is to be found on the servers of OV, at omegav@omegav.no. 
+As before, the reader is assumed to have basic skills in programming. SQL use \$ in front of all variables. To edit the database, PHP use pg\_query(). However, it is not safe to use pg\_query directly, as the very simple hacking technique \href{https://www.w3schools.com/sql/sql_injection.asp}{SQL-injections} exists. To avoid this, combine an array with the variables to get or set in the database. To do this, use pg\_query\_params(). For example:
+\begin{minted}{php}
+<?php
+    $query = "SELECT * FROM komp_komponenter WHERE id = $1";
+    $params = array($id);
+    $row = pg_query_params($query, $params);
+?>
+\end{minted}
+
+Now, with the SQL and the code above, it is possible to use the database. Next, users need to be able to access the API. As mentioned, this will be done through a web link. The PHP file with the code will be run when people try to reach this link. The link to the new API for components will be \url{https://omegav.no/api/komp.php}. To achieve this, the file is saved at omegav@omegav.no at the path "$\sim$ www/omegav.no/api/komp.php". For the PHP script to understand which variables to pass into it, it is necessary to send a specialized request, using the HTTP protocol, to this above url. There is functionality in most programming languages to do this. In \cref{sec:Python_API} it is shown how this can be done. When the PHP script gets this information, it will be in the form of a HTTP method. This method will be \$\_GET or \$\_POST, where the get method asks for data from the API, while the post method send data to the API. For simplicity's sake, the API will use \$\_REQUEST, which is a combination of these two. Now check if the request contains data by using isset(), and return an empty string if not. To safely request data from the user, the PHP code will look like:
+\begin{minted}{PHP}
+<?php
+    $handling = isset($_REQUEST['handling']) ? $_REQUEST['handling'] : "";
+?>
+\end{minted}
+
+Now data must to be returned to the user. This can be done by simply using "print". But to return all data in the same manner, to make it easier to handle by the user. Therefore, format the return to JavaScript Object Notation (JSON). This is a popular standard used for formatting messages. Most programming languages have functionality for parsing JSON data, which again makes it easier for developers to use the API. PHP has the function json\_encode() which is all that is needed to encode our data to the JSON standard. To make it easier for the user, set the HTTP header to JSON by doing: header('Content-type: application/json'); Now return data to the user like this:
+\begin{minted}{PHP}
+<?php
+    print json_encode($res);
+    header('Content-type: application/json');
+?>
+\end{minted}
+
+\subsection{Vending machine and fixes} \label{sec:vending_machine}
+OV has a vending machine for sale of electrical components in "Coopen". This already has an API for interacting with the SQL database. Yet the functionality of this API is too narrow, since it is designed to work with the vending machine only. 
+Members have profiles at OV, where they put money into a kind of account we have for them. They can then use the money to buy components. The only thing they need in order to buy those is an RFID card registered under their account. This trust-based system works fine when someone is purchasing at the workshop, because there is always a board member at the location when it is open. However, for buying components from the vending machine, OV wanted a more secure solution. This was implemented by requiring a pin code from the buyer, to ensure their identity. 
+Since the new component sale system will be stationed at the workshop, the pin code will no longer be needed for all sales which use the API. The only sales that must be verified, are the ones that go through the vending machine. Therefore, a check for sales from the vending machine was added before the pin verification in komp.php kjop() function.d. 
+
+Furthermore the vending machine only has columns and rows. The API only had input for those two, while the component database has: Room, Section, Shelf, Row, Column and Depth. Inputs for the additional was implemented into the API. To make the API easier to use, documentation was added to OV's wiki. Since the API is an internal matter, which cannot linked, screenshots are shown in \cref{fig:api_doc} and \cref{fig:ajax_doc}. 
+
+
+\begin{figure}
+    \centering
+     \hspace*{-2cm}
+    \includegraphics[scale=0.7]{Figurer/api_doc.PNG}
+    \caption{Documentation from the wiki on the API}
+    \label{fig:api_doc}
+\end{figure}
+
+\begin{figure}
+    \centering
+     \hspace*{-2cm}
+    \includegraphics[scale=0.7]{Figurer/ajax_doc.PNG}
+    \caption{Documentation from the wiki on how to search for components using the API }
+    \label{fig:ajax_doc}
+\end{figure}
+
+
+\subsection{Python API interface} \label{sec:Python_API}
+It was necessary to make functions so that the Hub could use the API; These were written in Python. This was done both to make life easier for Magne, and for testing while developing the API. These can be found at \url{https://git.omegav.no/ov/neokomp/blob/master/Software-hub/api_communication.py}. The Python package "urllib" is used to handle the communication. The usage of this is quite straight forward: First use urllib.parse.urlencode and encode() to format a dictionary to a form the API can read. Names of the variables in the API must be used as input, with syntax as: \{'handling' : 'funksjon\_1'\}. Use urllib.request.Request to send data to the API and get data back at the same time. Remember from \cref{sec:API_PHP}, that "request" executes both "post" and "get". Finally use urllib.request.urlopen().read() to format the data back into a Python dictionary. It is easier to work with this format.
+
+\subsection{Nordic Semiconductors: Bluetooth Low Energy work Architecture}
+\label{sec:urd_ble}
+\subsubsection{How to make programming the nRF easier}
+The nRF52 in this project is programmed in the c programming language, as is normal for many microcontrollers. To program this one, knowledge of APIs is required. This is because Nordic Semiconductors do not only produce microcontrollers, they also make software for the microcontrollers, called Soft Devices. These are a set of functions necessary for programming the nRF52. When downloading the Soft Device, you get header files for these functions. When using the Software Development Kit (SDK) (see below), the Soft Device function can more easily be found by backtracking function calls. Many  Integrated Development Environments (IDE) have support for "Go to function definition", which is helpful. 
+Its useful to have these readymade functions, however, there is a disadvantage. There are a lot of different functions, so it can be hard to find the correct function to use. To be more exact, the Software Device contains over a thousand files, amounting to a total of almost 190 000 lines of code and 140 000 lines of comments. Of course they are sorted in respective folders and with helpful file names. For example, in order to use Bluetooth, navigate to the Bluetooth Low Energy(BLE) folder. Even so, it can be overwhelming.
+
+Nordic Semiconductors have supplied us with another tool, called the Software Development Kit, the nRF5 SDK. This contains a lot of examples covering different uses of the nRF52. By using some of these examples, it is not necessary to dig as deep into the Soft Device. Of course this project will not do the exact same thing as in the example, but it does roughly the same. More importantly, these use the correct functions, making the examples a useful asset for navigating the Soft Device.
+
+\subsubsection{How Bluetooth Low Energy work}
+BLE is a complex protocol, which translates into a complex implementation. This is another reason why the SDK is a great support: it provides examples which do the setup for bluetooth. It is sufficient to only  edit the examples, as this project has basic bluetooth functionality. Therefore it is not necessary to go through the setup in detail. Here follows a rough explanation of the different parts necessary to perform BLE communication. They need to be initialized.
+
+A generalized architecture of the nRF52 can be seen in \cref{fig:nRF_architecture}. ATT is short for ATTribute Protocol. Explained in a simplified way, all that the ATT does is to keep track of three variables: \textcircled{1} A 16-bit handle , which identifies the attribute. \textcircled{2} A value of a certain length. \textcircled{3} The Universally Unique IDentifier, UUID, which is defined by the Generic ATTribute Protocol (GATT). The GATT defines how multiple ATT attributes are grouped together to perform useful tasks. These groups are called Services. For example: GATT can create a service that returns the status of a button. It also has to define a general UUID, f.ex. 0x2800, and one specific handle for the service, f.ex. 0x0100. To do the same for another button, give a new handle to this button, while keeping the general UUID. 
+
+Generic Access Profile (GAP) on the other hand, defines the general settings of the BLE. For example, it chooses whether the chip is to be a broadcaster or an observer. Or GAP chooses between the roles of  peripheral and central. SMP and L2CAP are bluetooth protocols which lay deeper in the software stack, meaning they wont be interfaced directly. (You can look them up yourself if you want to know how they operate.) The Host then uses the controller to make send BLE signals. 
+There are a lot of tutorials and explanations on the internet about the bluetooth protocol.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{Figurer/nordic_architecture.png}
+    \caption{A generalized architecture of the nRF52}
+    \label{fig:nRF_architecture}
+\end{figure}
+
+\subsection{Nordic Semiconductors: Programming}
+The behaviour of the bluetooth of the module is well described in \cref{sec:hub_ble_manager}.
+It was time consuming to design and produce the custom Printed Circuit Board(PCB). Therefore the \href{https://www.nordicsemi.com/Software-and-Tools/Development-Kits/nRF52-DK/Getting-Started}{nRF52 Development Kit} was used for testing the code. For a beginner's guide on how to program the nRF, see: \url{https://confluence.omegav.no/display/OV/nRF52dk}.
+
+Here follows a description in detail of the changes made to make the Module work as intended. The intention was that the Module should wake up and start to advertise when a button is pressed, then host a service that holds a  number(position), which the Hub should be able to read. Then when the Hub disconnects, the Module should go back to sleep.
+
+The test code for the development kit can be found in the folder "testurd" at \url{https://git.omegav.no/ov/neokomp/tree/master/Software-modul}. Segger Embedded studio is recommended, as this will be used in the following explanation. All functions are in main.c unless otherwise specified.
+Start with the ble\_peripheral example ble\_app\_blinky. It would be practical to have access to more buttons on the Development Kit, therefore, duplicate code inside button\_init() in the the main.c file. Then define the new buttons at the top of the file. To handle the four buttons differently, make a switch case in button\_event\_handler(). Now send a different 4 length array depending on which button is pressed. When implementing on the custom board, the code inside one switch could be changed individually by turning the encoders. The ble\_app\_blinky example can send only one integer at a time. To send four ("Hylle", "Rad", "Kolonne" and "Dybde") go to the ble\_lbs\_init() (from ble\_lbs.c) function, found in services\_init(). Here, edit init\_len and max\_len to 4. Thus making the SDK able to send an array with a length of 4.
+
+The "blinky" example advertises all the time. To advertise only after a button press, add advertising\_start() to the button\_event\_handler() (both in main.c). Make advertising\_stop(), similar to advertising\_start(), but use sd\_ble\_gap\_adc\_adv\_stop() instead of sd\_ble\_gap\_adc\_adv\_start(). To avoid startit advertising multiple times on multiple button presses, include the global variable advertising\_now. Then stop advertising when connection stops by adding advertising\_stop() to the BLE\_GAP\_EVT\_DISCONNECTED case in the ble\_evt\_handler() function. There were no substantial problems when migrated the bluetooth code from the Development Kit to the custom Module.
+
+\subsection{Future features}
+When this report was handed in, the following features had not yet been implemented into the bluetooth and API parts of the finished product. These should fixed in the future (Maybe by the reader).
+\begin{itemize}
+    \item The API does not have support for search by barcode. This will have to be added to the kompsok.php, so that every component in the json file gets the identity barcode(strekkode).
+    \item It is not possible to toggle a led on the Module from the Hub. This can be fixed by making the Module scan in intervals, and then the Hub will advertise when it wants to turn on a led. The Module will only scan for one advertisement UUID, and so the Hub can target a specific Module. Then the Module can turn on a led with a timer attached.
+    \item While writing the code, I could not figure out how to send more than a 4 long array per service. I fixed this by only sending "Hylle", "Rad", "Kolonne" and "Dybde". Then "Seksjon" will have to be a part of the name(UUID). This could be fixed either by figuring out how to send more characters, or by doing two different services, with four characters for each. 
+\end{itemize}
