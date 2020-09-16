@@ -11,3 +11,7 @@ jobs:
         with:
           root_file: main.tex
           latexmk_shell_escape: true
+      - uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: main.pdf
