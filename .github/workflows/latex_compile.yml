@@ -11,3 +11,11 @@ jobs:
         with:
           root_file: main.tex
           args: -pdf -latexoption=-file-line-error -latexoption=-interaction=nonstopmode -latexoption=-shell-escape
+      -name: Save PDF
+        uses: actions/checkout@v2
+        run: mkdir -p path/to/artifact
+        run: echo hello > path/to/artifact/world.txt
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: path/to/artifact/world.txt
