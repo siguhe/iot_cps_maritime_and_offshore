@@ -1,0 +1,88 @@
+
+asn
+    [String] The autonomous system number (ex. "AS4837").
+data
+    [String] Contains the banner information for the service.
+ip
+    [Integer] The IP address of the host as an integer.
+ip_str
+    [String] The IP address of the host as a string.
+ipv6
+    [String] The IPv6 address of the host as a string. If this is present then the "ip" and "ip_str" fields wont be.
+port
+    [Integer] The port number that the service is operating on.
+timestamp
+    [String] The timestamp for when the banner was fetched from the device in the UTC timezone. Example: "2014-01-15T05:49:56.283713"
+hostnames
+    [String[]] An array of strings containing all of the hostnames that have been assigned to the IP address for this device.
+domains
+    [String[]] An array of strings containing the top-level domains for the hostnames of the device. This is a utility property in case you want to filter by TLD instead of subdomain. It is smart enough to handle global TLDs with several dots in the domain (ex. "co.uk")
+location
+    [Object] An object containing all of the location information for the device.
+location.area_code
+    [Integer]The area code for the device's location. Only available for the US.
+location.city
+    [String] The name of the city where the device is located.
+location.country_code
+    [String] The 2-letter country code for the device location.
+location.country_code3
+    [String] The 3-letter country code for the device location.
+location.country_name
+    [String] The name of the country where the device is located.
+location.dma_code
+    [Integer] The designated market area code for the area where the device is located. Only available for the US.
+location.latitude
+    [Double] The latitude for the geolocation of the device.
+location.longitude
+    [Double] The longitude for the geolocation of the device.
+location.postal_code
+    [String] The postal code for the device's location.
+location.region_code
+    [String] The name of the region where the device is located.
+opts
+    [Object] Contains experimental and supplemental data for the service. This can include the SSL certificate, robots.txt and other raw information that hasn't yet been formalized into the Banner Specification.
+org
+    [String] The name of the organization that is assigned the IP space for this device.
+isp
+    [String] The ISP that is providing the organization with the IP space for this device. Consider this the "parent" of the organization in terms of IP ownership.
+os
+    [String] The operating system that powers the device.
+transport
+    [String] Either "udp" or "tcp" to indicate which IP transport protocol was used to fetch the information
+
+
+Optional Properties
+
+uptime
+    [Integer] The number of minutes that the device has been online.
+link
+    [String] The network link type. Possible values are: "Ethernet or modem", "generic tunnel or VPN", "DSL", "IPIP or SIT", "SLIP", "IPSec or GRE", "VLAN", "jumbo Ethernet", "Google", "GIF", "PPTP", "loopback", "AX.25 radio modem".
+title
+    [String] The title of the website as extracted from the HTML source.
+html
+    [String] The raw HTML source for the website.
+product
+    [String] The name of the product that generated the banner.
+version
+    [String] The version of the product that generated the banner.
+devicetype
+    [String] The type of device (webcam, router, etc.).
+info
+    [String] Miscellaneous information that was extracted about the product.
+cpe
+    [String] The relevant Common Platform Enumeration for the product or known vulnerabilities if available. For more information on CPE and the official dictionary of values visit the CPE Dictionary. 
+
+
+If the service uses SSL, such as HTTPS, then the banner will also contain a property called "ssl":
+
+ssl.cert
+    [Object] The parsed certificate properties that includes information such as when it was issued, the SSL extensions, the issuer, subject etc.
+ssl.cipher
+    [Object] Preferred cipher for the SSL connection
+ssl.chain
+    [Array] An array of certificates, where each string is a PEM-encoded SSL certificate. This includes the user SSL certificate up to its root certificate.
+ssl.dhparams
+    [Object] The Diffie-Hellman parameters if available: "prime", "public_key", "bits", "generator" and an optional "fingerprint" if we know which program generated these parameters.
+ssl.versions
+    [Array] A list of SSL versions that are supported by the server. If a version isnt supported the value is prefixed with a "-". Example: ["TLSv1", "-SSLv2"] means that the server supports TLSv1 but doesnt support SSLv2.
+
