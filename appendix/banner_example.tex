@@ -1,39 +1,268 @@
-\begin{lstlisting}
+\section{Banner example} \label{app:marlink_banner}
 
+\begin{lstlisting}
 {
-   "timestamp": "2014-01-16T08:37:40.081917",
-   "hostnames": [
-      "99-46-189-78.lightspeed.tukrga.sbcglobal.net"
-   ],
-   "org": "AT&T U-verse",
-   "guid": "1664007502:75a821e2-7e89-11e3-8080-808080808080",
-   "data": "NTP\nxxx.xxx.xxx.xxx:7546\n68.94.157.2:123\n68.94.156.17:123",
-   "port": 123,
-   "isp": "AT&T U-verse",
-   "asn": "AS7018",
-   "location": {
-      "country_code3": "USA",
-      "city": "Atlanta",
-      "postal_code": "30328",
-      "longitude": -84.3972,
-      "country_code": "US",
-      "latitude": 33.93350000000001,
-      "country_name": "United States",
-      "area_code": 404,
-      "dma_code": 524,
-      "region_code": null
-   },
-   "ip": 1664007502,
-   "domains": [
-      "sbcglobal.net"
-   ],
-   "ip_str": "99.46.189.78",
-   "os": null,
-   "opts": {
-      "raw": "[ HEX VALUES EDITED OUT OF THIS REPORT ]",
-      "ntp": {
-         "more": false
-      }
-   }
+  "area_code": null,
+  "asn": "AS5377",
+  "city": null,
+  "country_code": "NO",
+  "country_code3": null,
+  "country_name": "Norway",
+  "data": [
+    {
+      "_shodan": {
+        "crawler": "59f6eda5a6b574c5c0478ef4da1560159fca2427",
+        "id": "279ed268-25f4-4e97-a751-a49be8b73704",
+        "module": "http-simple-new",
+        "options": {},
+        "ptr": true
+      },
+      "asn": "AS5377",
+      "data": "HTTP/1.1 302 Found\r\nLocation: https://193.220.107.30:8015/\r\nConnection: close\r\nX-Frame-Options: SAMEORIGIN\r\nX-XSS-Protection: 1; mode=block\r\nX-Content-Type-Options: nosniff\r\nContent-Security-Policy: frame-ancestors\r\n\r\n",
+      "domains": [],
+      "hash": 1956723272,
+      "hostnames": [],
+      "http": {
+        "host": "193.220.107.30",
+        "html": "",
+        "html_hash": 0,
+        "location": "/",
+        "redirects": [],
+        "robots": null,
+        "robots_hash": null,
+        "securitytxt": null,
+        "securitytxt_hash": null,
+        "server": null,
+        "sitemap": null,
+        "sitemap_hash": null,
+        "title": null
+      },
+      "ip": 3252448030,
+      "ip_str": "193.220.107.30",
+      "isp": "MARLINK",
+      "location": {
+        "area_code": null,
+        "city": null,
+        "country_code": "NO",
+        "country_code3": null,
+        "country_name": "Norway",
+        "dma_code": null,
+        "latitude": 59.9452,
+        "longitude": 10.7559,
+        "postal_code": null,
+        "region_code": null
+      },
+      "opts": {},
+      "org": "MARLINK",
+      "os": null,
+      "port": 8008,
+      "timestamp": "2020-09-17T11:08:44.897099",
+      "transport": "tcp"
+    }
+  ],
+  "dma_code": null,
+  "domains": [],
+  "hostnames": [],
+  "ip": 3252448030,
+  "ip_str": "193.220.107.30",
+  "isp": "MARLINK",
+  "last_update": "2020-09-17T11:08:44.897099",
+  "latitude": 59.9452,
+  "longitude": 10.7559,
+  "org": "MARLINK",
+  "os": null,
+  "ports": [
+    8008
+  ],
+  "postal_code": null,
+  "region_code": null,
+  "tags": []
+}
+
+\end{lstlisting}
+\newpage
+
+\section{Banner example smaller}
+
+\begin{lstlisting}[basicstyle=\tiny]
+{
+  "area_code": null,
+  "asn": "AS5377",
+  "city": null,
+  "country_code": "NO",
+  "country_code3": null,
+  "country_name": "Norway",
+  "data": [
+    {
+      "_shodan": {
+        "crawler": "59f6eda5a6b574c5c0478ef4da1560159fca2427",
+        "id": "279ed268-25f4-4e97-a751-a49be8b73704",
+        "module": "http-simple-new",
+        "options": {},
+        "ptr": true
+      },
+      "asn": "AS5377",
+      "data": "HTTP/1.1 302 Found\r\nLocation: https://193.220.107.30:8015/\r\nConnection: close\r\nX-Frame-Options: SAMEORIGIN\r\nX-XSS-Protection: 1; mode=block\r\nX-Content-Type-Options: nosniff\r\nContent-Security-Policy: frame-ancestors\r\n\r\n",
+      "domains": [],
+      "hash": 1956723272,
+      "hostnames": [],
+      "http": {
+        "host": "193.220.107.30",
+        "html": "",
+        "html_hash": 0,
+        "location": "/",
+        "redirects": [],
+        "robots": null,
+        "robots_hash": null,
+        "securitytxt": null,
+        "securitytxt_hash": null,
+        "server": null,
+        "sitemap": null,
+        "sitemap_hash": null,
+        "title": null
+      },
+      "ip": 3252448030,
+      "ip_str": "193.220.107.30",
+      "isp": "MARLINK",
+      "location": {
+        "area_code": null,
+        "city": null,
+        "country_code": "NO",
+        "country_code3": null,
+        "country_name": "Norway",
+        "dma_code": null,
+        "latitude": 59.9452,
+        "longitude": 10.7559,
+        "postal_code": null,
+        "region_code": null
+      },
+      "opts": {},
+      "org": "MARLINK",
+      "os": null,
+      "port": 8008,
+      "timestamp": "2020-09-17T11:08:44.897099",
+      "transport": "tcp"
+    }
+  ],
+  "dma_code": null,
+  "domains": [],
+  "hostnames": [],
+  "ip": 3252448030,
+  "ip_str": "193.220.107.30",
+  "isp": "MARLINK",
+  "last_update": "2020-09-17T11:08:44.897099",
+  "latitude": 59.9452,
+  "longitude": 10.7559,
+  "org": "MARLINK",
+  "os": null,
+  "ports": [
+    8008
+  ],
+  "postal_code": null,
+  "region_code": null,
+  "tags": []
 }
 \end{lstlisting}
+
+
+\section{Shodan banner properties} \label{app:banner_properties}
+Banner specifications from \cite{banner_spec}, for both properties, optional properties and SSl properties. Here grouped as regular properties (properties) and situational properties(optional properties and SSL properties).
+\subsection{Regular properties} \label{app:reg_prop}
+\begin{table} [H]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l|l|} 
+\Xhline{2\arrayrulewidth}
+\textbf{Property}       & \textbf{Description}                                                                                                                                                                                                                                                                                                     \\ 
+\Xhline{2\arrayrulewidth}
+asn                     & {[}String] The autonomous system number (ex. "AS4837").                                                                                                                                                                                                                                                                  \\ 
+\hline
+data                    & {[}String] Contains the banner information for the service.                                                                                                                                                                                                                                                              \\ 
+\hline
+ip                      & {[}Integer] The IP address of the host as an integer.                                                                                                                                                                                                                                                                    \\ 
+\hline
+ip\_str                 & {[}String] The IP address of the host as a string.                                                                                                                                                                                                                                                                       \\ 
+\hline
+ipv6                    & \begin{tabular}[c]{@{}l@{}}{[}String] The IPv6 address of the host as a string. \\If this is present then the "ip" and "ip\_str" fields wont be.\end{tabular}                                                                                                                                                            \\ 
+\hline
+port                    & {[}Integer] The port number that the service is operating on.                                                                                                                                                                                                                                                            \\ 
+\hline
+timestamp               & \begin{tabular}[c]{@{}l@{}}{[}String] The timestamp for when the banner was fetched from \\the device in the UTC timezone. Example: "2014-01-15T05:49:56.283713"\end{tabular}                                                                                                                                            \\ 
+\hline
+hostnames               & \begin{tabular}[c]{@{}l@{}}{[}String[]] An array of strings containing all of the hostnames that have\\ been assigned to the IP address for this device.\end{tabular}                                                                                                                                                    \\ 
+\hline
+domains                 & \begin{tabular}[c]{@{}l@{}}{[}String[]] An array of strings containing the top-level domains for the hostnames of the device.\\This is a utility property in case you want to filter by TLD instead of subdomain.\\ It is smart enough to handle global TLDs with several dots in the domain (ex. "co.uk")\end{tabular}  \\ 
+\hline
+location                & {[}Object] An object containing all of the location information for the device.                                                                                                                                                                                                                                          \\ 
+\hline
+location.area\_code     & {[}Integer]The area code for the device's location. Only available for the US.                                                                                                                                                                                                                                           \\ 
+\hline
+location.city           & {[}String] The name of the city where the device is located.                                                                                                                                                                                                                                                             \\ 
+\hline
+location.country\_code  & {[}String] The 2-letter country code for the device location.                                                                                                                                                                                                                                                            \\ 
+\hline
+location.country\_code3 & {[}String] The 3-letter country code for the device location.                                                                                                                                                                                                                                                            \\ 
+\hline
+location.country\_name  & {[}String] The name of the country where the device is located.                                                                                                                                                                                                                                                          \\ 
+\hline
+location.dma\_code      & \begin{tabular}[c]{@{}l@{}}{[}Integer] The designated market area code for the area where\\ the device is located. Only available for the US.\end{tabular}                                                                                                                                                               \\ 
+\hline
+location.latitude       & {[}Double] The latitude for the geolocation of the device.                                                                                                                                                                                                                                                               \\ 
+\hline
+location.longitude      & {[}Double] The longitude for the geolocation of the device.                                                                                                                                                                                                                                                              \\ 
+\hline
+location.postal\_code   & {[}String] The postal code for the device's location.                                                                                                                                                                                                                                                                    \\ 
+\hline
+location.region\_code   & {[}String] The name of the region where the device is located.                                                                                                                                                                                                                                                           \\ 
+\hline
+opts                    & \begin{tabular}[c]{@{}l@{}}{[}Object] Contains experimental and supplemental data for the service. \\This can include the SSL certificate, robots.txt and other raw information\\ that hasn't yet been formalized into the Banner Specification.\end{tabular}                                                            \\ 
+\hline
+org                     & {[}String] The name of the organization that is assigned the IP space for this device.                                                                                                                                                                                                                                   \\ 
+\hline
+isp                     & \begin{tabular}[c]{@{}l@{}}{[}String] The ISP that is providing the organization with the IP space for this device. \\Consider this the "parent" of the organization in terms of IP ownership.\end{tabular}                                                                                                              \\ 
+\hline
+os                      & {[}String] The operating system that powers the device.                                                                                                                                                                                                                                                                  \\ 
+\hline
+transport               & \begin{tabular}[c]{@{}l@{}}{[}String] Either "udp" or "tcp" to indicate which IP transport protocol \\was used to fetch the information\end{tabular}                                                                                                                                                                     \\
+\hline
+\end{tabular}}
+\end{table}
+
+\subsection{Situational properties} \label{app:sit_prop}
+\begin{table}[H]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l|l|} 
+\Xhline{2\arrayrulewidth}
+\textbf{Properties} & \textbf{Description}                                                                                                                                                                                                                                                                \\ 
+\Xhline{2\arrayrulewidth}
+uptime              & {[}Integer] The number of minutes that the device has been online.                                                                                                                                                                                                                  \\ 
+\hline
+link                & \begin{tabular}[c]{@{}l@{}}{[}String] The network link type. Possible values are: "Ethernet or modem",\\ "generic tunnel or VPN", "DSL", "IPIP or SIT", "SLIP", "IPSec or GRE", "VLAN",\\ "jumbo Ethernet", "Google", "GIF", "PPTP", "loopback", "AX.25 radio modem".\end{tabular}  \\ 
+\hline
+title               & {[}String] The title of the website as extracted from the HTML source.                                                                                                                                                                                                              \\ 
+\hline
+html                & {[}String] The raw HTML source for the website.                                                                                                                                                                                                                                     \\ 
+\hline
+product             & {[}String] The name of the product that generated the banner.                                                                                                                                                                                                                       \\ 
+\hline
+version             & {[}String] The version of the product that generated the banner.                                                                                                                                                                                                                    \\ 
+\hline
+devicetype          & {[}String] The type of device (webcam, router, etc.).                                                                                                                                                                                                                               \\ 
+\hline
+info                & {[}String] Miscellaneous information that was extracted about the product.                                                                                                                                                                                                          \\ 
+\hline
+cpe                 & \begin{tabular}[c]{@{}l@{}}{[}String] The relevant Common Platform Enumeration for the product or known vulnerabilities if available.\\For more information on CPE and the official dictionary of values visit the CPE Dictionary.\end{tabular}                                     \\ 
+\hline
+ssl.cert            & \begin{tabular}[c]{@{}l@{}}{[}Object] The parsed certificate properties that includes information\\ such as when it was issued, the SSL extensions, the issuer, subject etc.\end{tabular}                                                                                           \\ 
+\hline
+ssl.cipher          & {[}Object] Preferred cipher for the SSL connection                                                                                                                                                                                                                                  \\ 
+\hline
+ssl.chain           & \begin{tabular}[c]{@{}l@{}}{[}Array] An array of certificates, where each string is a PEM-encoded SSL certificate.\\ This includes the user SSL certificate up to its root certificate.\end{tabular}                                                                                \\ 
+\hline
+ssl.dhparams        & \begin{tabular}[c]{@{}l@{}}{[}Object] The Diffie-Hellman parameters if available: "prime", "public\_key", "bits",\\ "generator" and an optional "fingerprint" if we know which program generated these parameters.\end{tabular}                                                     \\ 
+\hline
+ssl.versions        & \begin{tabular}[c]{@{}l@{}}{[}Array] A list of SSL versions that are supported by the server.\\ If a version isnt supported the value is prefixed with a "-".\\ Example: ["TLSv1", "-SSLv2"] means that the server supports TLSv1 but doesnt support SSLv2.\end{tabular}            \\
+\hline
+\end{tabular}}
+\end{table}

@@ -5,11 +5,11 @@
 \usepackage[english]{babel}
 \usepackage[margin=1.2in]{geometry}
 \usepackage{todonotes}
-\usepackage[toc, page]{appendix}
+\usepackage{appendix}
 \usepackage[final]{pdfpages}
 \usepackage{amsmath}
 \usepackage{hyperref}
-\usepackage{cleveref}
+\usepackage[capitalize]{cleveref}
 \usepackage{utopia}
 \usepackage{cite}
 
@@ -54,7 +54,7 @@
   stringstyle=\color{mauve},
   breaklines=true,
   breakatwhitespace=true,
-  tabsize=3
+  tabsize=3,
 }
 %%Code includes end
 
@@ -65,6 +65,9 @@
 \DeclareUnicodeCharacter{2212}{-} %google said I should include 
 %% Front page
 \renewcommand{\baselinestretch}{1.15} 
+
+\AtBeginEnvironment{appendices}{\crefalias{section}{appendix}} %Fix cref appendix
+
 \begin{document}
 \begin{titlepage}
       \begin{center}
@@ -75,7 +78,7 @@
         \end{figure} 
         \vspace*{1cm}
         {\Large{TTK4550}}\\[0.4cm] 
-        {\Large{\textit{Assessment of the exposure of publicly accessible cyber-physical systems }}}\\[0.5cm]
+        {\Large{\textit{Assessment of the exposure of publicly discoverable cyber-physical systems }}}\\[0.5cm]
         {\Huge{Pre-study report}}\\[0.5cm] 
         {\Large{Sigurd Hellesvik}}\\[0.4cm] %%student numbers only, no names
         \large{\today}
@@ -100,6 +103,7 @@
 \input{intro}
 \input{project_desc}
 \input{literature}
+\input{shodan}
 \input{shodan_search}
 \input{new}
 
@@ -111,9 +115,9 @@
 %% Appendix
 \newpage
 \begin{appendices} \label{appendix}
+\input{"appendix/dictionary"}
 \input{"appendix/project_announcement"}
 \input{"appendix/search_filters"}
-\input{"appendix/dictionary"}
 \input{"appendix/banner_example"}
 \end{appendices}
 

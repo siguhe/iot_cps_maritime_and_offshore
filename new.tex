@@ -1,41 +1,27 @@
 \section{WORK IN PROGRESS} \label{sec:new}
 
-\subsection{API reference}
-The shodan API have multiple different search methods. The methods relevant for 
-
-\section{More literature}
-\subsubsection{Shodan Vizualized}
-The article \textit{Shodan Visualized} gives a map of SCADA devices connected to the internet.\cite{ercolani_patton_chen_2016} This is good to prove the point that a lot of CPSs are connected. For myself: Look into difference between CPS and SCADA. 
-
-\subsubsection{Evaluation of the ability of the Shodan search engine to identify Internet-facing industrial control devices}
-\textit{Evaluation of the ability of the Shodan search engine to identify Internet-facing industrial control devices} gives a good overview of how Shodan works, with an explanation of the Shodan process for indexing webpages.\cite{bodenheim_butts_dunlap_mullins_2014} 
-In addition, it shows how Shodan can be used to search for Industrial Control Devices(ICS). A lot of those ICS will be used in the offshore industry, and some in the maritime industry. 
-Lastly, the report shows that obfuscating devices make them harder to find using Shodan.
-
 \section{Shodan}
-\subsection{Interface}
-It is possible to make a up to 5 queries using Shodan without registering an account. 
-With a free account, it is possible to perform more queries, access to the Shodan API, and limited access to search filters. However, without a paid account, the website can has limited use.
-Using the API, a free user can access up to 100 results from searches. 
-For paid users, there are three payment plans: Freelancer, Small Business and Corporate. A Freelancer user get access to up to 1 million results per month and access to most search filters. 
-Users paying for the higher tiers can get from 20 million to unlimited amount of results, all search filters and multiple extra benefits. 
-1 million results per month will be sufficient for the scope of this project.
+\subsection{Crawlers and banners}\todo{Add a more complete example, when it is payed properly}
+Shodan have bots called "crawlers" to find information about internet connected devices. These crawlers will continuously scan random ports of random IP addresses. If the port is open, the crawler will gather all the information it can about the port and IP, and save it. This can be properties such as IP address, port number, country, service running, version, protocols used, and more. 
+All these properties are saved in Shodan "banners"\todo{er dette ein god måte å introdusere eit fagord på? Treng eg referere til \cref{app:dictionary}?} . The creator of Shodan, John Matherly has described banners as "A banner is simply metadata about a service.". \cite{banner} 
+Therefore, when a user start a search using the Shodan search engine, it will not return live results, but rather the banners already saved in the Shodan database. Shodan guarantees that returned banners is collected in the last 30 days. 
+Some of the Shodan banner properties are always on banners, while others are situational. For example will SSL properties only occur on banners of ports that use SSL encryption. A complete list of both required and situational Shodan banner properties can be found in \cref{app:banner_properties}.
+Normally, the banners are in the JSON format. An example of a banner can be found in \cref{app:marlink_banner}.
 
-\subsection{Crawlers and banners}
-Shodan have bots called "crawlers" to find information about internet connected devices. These crawlers will continuously scan random ports of random IP addresses. If the port is open, the crawler will gather all the information it can about the port and IP, and save it. This can be information such as IP address, port number, country, service running, version, protocols used, and more. 
-For example, when using the search term: "AIS", the IP address 216.246.73.86 was found. This server has port 443 open. This is hosting a https website named unknown.iad.scnet.net. This is a AIS Streaming Server of the version 8.5.5. The SSL certificate is listed and the server is in USA.
-All this information is saved in what Shodan call banners. The creator of Shodan, John Matherly has described banners as "A banner is simply metadata about a service.". \cite{banner} 
-Therefore, when a user start a search using the Shodan search engine, it will not return live results, but rather the banners already saved in the Shodan database. 
 
-\subsection{Search filters}
-To search for just a word is the simplest method for making a query with the Shodan search engine. This will return all results where the word could be found in the banner. To limit the results more exact, filters can be activated. Filters can be used together with basic word search, and with other filters. For example will the following query return all devices connected to port 80, which is the normal port for hosting HTTP web pages. 
-
+\subsection{Search filters} \label{sec:filters}
+To limit the results returned from a Shodan query, filters are applied. Filters are on the format:
 \begin{lstlisting}
-{
-port: 80
-}
+filter_property: value
 \end{lstlisting}
+When using a filter, Shodan queries will return banners where the properties specified in the filter contain the specified value. In most cases, filter properties correspond with banners. However, some filter properties are not banner properties. For example can the "geo" filter property define an area. The Shodan query will then return all banners where the "location.latitude" and "location.longitude" properties is within this banner. A complete list of Shodan filter properties can be found in \cref{app:shodan_filters}.
+
+
+\todo{define Shodan Queries}
+
 
 A comprehensive list of the Shodan filters can be found in \cref{app:shodan_filters}, . The queries used in this project will be explained in more detail. 
+
+Add something about RegEx, and other search methods here. 
 
 
