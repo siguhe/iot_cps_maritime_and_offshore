@@ -1,6 +1,13 @@
 \section{WORK IN PROGRESS} \label{sec:new}
+Look into network discovery, for NAT.
+Gå gjennom NAT?
+traceroute 
+Sjå på DNS tracing?
+TODO: 
 
-\subsection{Internet Protocol(IP)}
+
+
+\subsection{Internet Protocol}
 For a device connected to the internet to communicate with other devices, it needs to use an IP address. However, as the IPv4 range becomes exhausted, less devices get dedicated IPv4 addresses. To be able to connect these, several solutions are used. The two most popular are IPv6 and Network address translation (NAT).
 IPv6 has enough IP addresses for the foreseeable future. However, the internet has not yet fully changed to using IPv6. Shodan has crawlers for the IPv6 address space.
 NAT lets you connect multiple devices to the same IPv4. This is done by using a routing device with a shared IPv4 address to receive packages for multiple different devices, and then redirect the packages to the correct receiver. This makes it so that the devices behind the NAT can reach the internet, while the internet can not reach the devices unless the devices start the communication. Because of this, Shodan will only scan the outer NAT routing device, and not the devices behind the NAT. NAT is not always used for getting more IPv4 addresses. Sometimes it is used purposely to hide IPv4 addresses from the public internet.
@@ -26,4 +33,10 @@ Internet Service Providers(ISP) are the organisations that connect people and co
 \subsection{IP range}
 IP addresses are commonly divided into ranges using Classless Inter-Domain Routing(CIDR). These IP ranges are owned by different companies. Often, it is the ISP that owns IP ranges. However, large enough companies sometimes own their own IP addresses. If a company with an IP range is within the search constraints, it could be possible to find the IP range of said company, and then use the Shodan filter "net" to find all IPs in the range that is connected.
 
+\begin{figure}
+    \centering
 
+    \includegraphics[scale=0.7]{Figurer/geolocation.png}
+    \caption{Shodan "geo" filter visualized. Map copyright: https://www.openstreetmap.org/copyright}
+    \label{fig:api_doc}
+\end{figure}
