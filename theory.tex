@@ -1,0 +1,16 @@
+\section{Methods}
+
+
+\subsection{Banner similarities}
+When connecting a device to the internet, it needs to be configured. The installer needs competence to do this properly, and to spend time to perform the installation. To make such devices more accessible and efficient, finished solutions are most often used. Due to this, the same devices mostly have the same default configuration, and therefore the same banners. This can be used to identify devices within the chosen constraints by using the following method.
+\begin{enumerate}
+    \item Identify a device fulfil the constraints and is connected to the internet.
+    \item Find the IP address of said device, and find its Shodan entry.
+    \item Get its banner.
+    \item Use unique information from the banner to find all devices with similar banners.
+\end{enumerate}
+The most difficult of these steps is to find the IP address. The easiest way to do this is to own a device and find its IP address. Unfortunately, this project does not have access to any devices that fit the constraints set.
+If this is not an option, the device would be found by guessing what information could be found in its banner, for example the device name or ports it has open.
+
+\subsection{Internet Service Provider} \label{sec:isp_method}
+Internet Service Providers(ISP) are the organisations that connect people and companies to the internet. ISP charges money to deliver internet connection, and most people have a subscription. While a lot of ISPs are generalized, and deliver the internet to both private and organizational customers, others are more specialized. If it is possible to find any ISP that only delivers to the groups defined in the constraints, Shodan can filter IP addresses based on ISP .
