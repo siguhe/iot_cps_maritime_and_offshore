@@ -1,20 +1,3 @@
-\section{Methods}
-
-
-\subsection{Banner similarities}
-When connecting a device to the internet, it needs to be configured. The installer needs competence to do this properly, and to spend time to perform the installation. To make such devices more accessible and efficient, finished solutions are most often used. Due to this, the same devices mostly have the same default configuration, and therefore the same banners. This can be used to identify devices within the chosen constraints by using the following method.
-\begin{enumerate}
-    \item Identify a device fulfil the constraints and is connected to the internet.
-    \item Find the IP address of said device, and find its Shodan entry.
-    \item Get its banner.
-    \item Use unique information from the banner to find all devices with similar banners.
-\end{enumerate}
-The most difficult of these steps is to find the IP address. The easiest way to do this is to own a device and find its IP address. Unfortunately, this project does not have access to any devices that fit the constraints set.
-If this is not an option, the device would be found by guessing what information could be found in its banner, for example the device name or ports it has open.
-
-\subsection{Internet Service Provider} \label{sec:isp_method}
-Internet Service Providers(ISP) are the organisations that connect people and companies to the internet. ISP charges money to deliver internet connection, and most people have a subscription. While a lot of ISPs are generalized, and deliver the internet to both private and organizational customers, others are more specialized. If it is possible to find any ISP that only delivers to the groups defined in the constraints, Shodan can filter IP addresses based on ISP.
-
 \section{Theory}
 
 \subsection{IPv4}
@@ -93,5 +76,4 @@ NAT\\Router
 \subsubsection{CIDR}
  Classless Inter-Domain Routing(CIDR) is the modern way to split the IPv4 address space into blocks, so that they can be distributed. A CIDR block can look like this: "93.192.0.0/10". This block has two parts, the prefix "93.192.0.0" and the suffix "/10". The prefix indicates the size of the CIDR block. The prefix indicates where in the IPv4 space the CIDR block is located. To understand this, it is useful to look at an IP address in binary instead of decimal. For example, the IPv4 address "93.220.107.30" becomes "01011101.11011100.01101011.00011110". The suffix decides how many bits are fixed. In the CIDR block "93.220.107.30/10", the 10 first bits of the prefix "93.220.107.30"  are "01011101.11xxxxxx.xxxxxxxx.xxxxxxxx". This number span the binary range \\ \{01011101.11111111.11111111.11111111 - 01011101.11000000.00000000.00000000 \}, or the decimal range  \{ 93.192.0.1 - 93.255.255.254 \}. Remark that not the full prefix is needed; "93.220.107.30/10" and "93.220.107.31/10" are the same CIDR  block. Because of this, it is normal to set the changing bits of the prefix to 0, as in: "93.192.0.0/10". 
 Since the sizes of CIDR blocks vary, they can be nested. For example, "93.192.0.0/11" is a part of "93.192.0.0/10".
-
 

@@ -4,3 +4,13 @@ Commands used for interacting with the Shodan API. Both using the Shodan REST AP
 \begin{lstlisting}[label=lst:api_ports,caption=Ports web API call]
 https://api.shodan.io/shodan/ports/?key={YOUR_API_KEY}
 \end{lstlisting}
+
+\begin{lstlisting}[label=lst:geolocation_sea,caption=Check for devices in the North Sea using command line ]
+Input: shodan count geo:56.40,3.01,270
+Output: 0
+\end{lstlisting}
+
+
+\begin{lstlisting}
+isp:marlink port:502,102,1911,4911,47808,44818,18245,18246,5006,5007,789 product:Niagara,:"general electric",product:mitsubishi,"Red Lion Controls"
+\end{lstlisting}
