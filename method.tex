@@ -49,5 +49,16 @@ With many major seaports, like Rotterdam, Antwerp and Hamburg, the North Sea has
     \label{fig:geolocation}
 \end{figure}
 
+\subsection{Latency and traceroute}
+The simplest form of reaching another device on the internet is called a "ping". This sends a echo request to an IP address, to make it send a response back. It is mostly used to check if a device is reachable. To prevent a bug where packets travel in an infinite loop instead of reaching the recipient, packets have a Time To Live (TTL) counter. This counter increments every time a packet travels trough a switch or router. When this counter is reached, the packet is stopped, and a message is returned to the sender, informing it of the loss.
+The "traceroute" command takes advantage of the fact that the Time To Live counter can be set by the sender. It will start the TTL counter at 1 and sending a message towards a predefined target IP address. This message will then travel 1 step towards its target before it is returned. Then it increments this counter and repeats the send. In addition, traceroute will time how long the packet uses before it is returned, called "Round Trip Time"(RTT).
+The Round Trip Time can give an idea of how the signal travels. Faster RTT can be because of shorter distance or better infrastructure. On the other hand, slow RTT can indicate farther distance or worse infrastructure.
+
+\section{Problems}
+\subsection{NAT}
+Due to NAT connecting devices to the internet trough a single router, Shodan will only scan the outer NAT routing device, and not the devices behind the NAT. NAT is not always used for getting more IPv4 addresses. Sometimes it is used purposely to hide IPv4 addresses from the public internet.
+
+\subsection{Obfuscation}
 
 
+\subsection{Geolocation}
