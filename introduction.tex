@@ -1,33 +1,99 @@
 \section{Introduction} \label{sec:intro}
-Cyber-Physical Systems(CPS) and Open-Source Intelligence(OSINT) are explained in \cref{sec:definitions}. While a lot of the Cyber-Physical Systems connected to the internet are well maintained and secure, many other are vulnerable. This is most often because the CPSs are not set up properly or run outdated software. Other than this, it is a "fact" of statistics that if a quantity CPSs are connected to the internet, a portion of these will be insecure. To explore the extent of this challenge, the first step is to identify how many CPSs can be reached. Constraints are set to limit the focus to \textbf{discoverable Cyber Physical Systems in the maritime and offshore industries.}
-Open-source intelligence(OSINT) is utilized to find these CPS. The OSINT search engine \href{https://shodan.io}{\color{blue}{Shodan}} is a popular search engine for enumerating Internet-connected systems, and will be used as the main reconnaissance tool of this project.
 
-\subsection{Collaboration}\label{sec:collaboration}
-This project is a collaboration between the main supervisor Mary Ann Lundteigen and PhD candidate Bálint Zoltán Téglásy, both representing NTNU; and the Global Service Line leader, Cybersecurity, at DNV-GL Trondheim,  Mate J Csorba. The student carrying out the project is Sigurd Hellesvik.
+\subsection{Background} \label{sec:background}
+With a higher than ever number for devices connected to the internet than ever\cite{iot_stats}, more devices are vulnerable than ever. Many do not want an wireless lock on their house, since there is a chance it can be hacked by malicious parties. The lock must of course be secure and resistant to attacks, but it is hard to make something a hundred percent secure. The same challenge is even more important for industrial systems, where loss of money, damage to the environment or even loss of life can be consequences of system failure. There are already many examples of cyber-attacks on industrial systems, for example STRUXNET\cite{struxnet}, a computer worm that infected an Iranian nuclear facility. 
+As with other industries, the marine and offshore industries are connecting more parts of their Cyber-Physical Systems(CPS) to the internet to improve their efficiency. While a lot of the Cyber-Physical Systems connected to the internet are well maintained and secure, many other are vulnerable. This is most often because the CPSs are not set up properly or run outdated software. Other than this, it is a "fact" of statistics that if a quantity Cyber-Physical Systems are connected to the internet, a portion of these will be insecure. 
 
-\subsubsection{DNV-GL}\label{sec:dnvgl}
-DNV-GL are a independent expert in risk management and quality assurance. The abbreviation is for "Det Norske Veritas" and "Germanischer Lloyd". A big portion of their focus is on the maritime and offshore business. The DNV-GL has a Cyber Security team that helps customers assess and manage risks related to cyber security.~\cite{DNVGL_cybersec}  The International Maritime Organization (IMO) "encourages administrations to ensure that cyber risks are appropriately addressed in existing safety management systems (as defined in the ISM Code) no later than [...] 1 January 2021".~\cite{IMO_2021} Because of this, many maritime corporations will have to pay more attention to cyber security; making maritime cyber security specialists like DNV-GL Cyber Security team all the more relevant for the business. 
+IEC62443 describes preliminary recommednations and guidance for the use of cybersecurity technology and countermeasures. To stay as secure as possible, the industries should apply these measures.\cite{IEC62443} Among other things, it spesifies that firewalls should be added to systems that have the ability to "[Filter] IP-addresses on the outside allowed on the inside and vice versa". And filter "[ports and] applications allowed for communication". In other words, only devices that have a good reason for beeing connected to the Internet should be connected. \todo{Where do I belong?}
+
+\subsection{Objectives}
+To explore the extent of this challenge, the first step is to identify how many CPSs can be reached. The goal is to list methods to discover Cyber Physical Systems in the maritime and offshore industries, and map how many of said systems can be discovered. From this the constraints are formulated:
+\begin{itemize}
+    \item The device is part of a Cyber Physical System(CPS)
+    \item The device is connected to the internet
+    \item The device is part of either the maritime or offshore industries
+\end{itemize}
+Since all publicly available devices can be found quite easily, the difficult part will be to recognize devices within the constraints.
+Open-source intelligence(OSINT) is utilized to find these CPS. The OSINT search engine \href{https://shodan.io}{\color{blue}{Shodan}} is a popular search engine for enumerating Internet-connected systems, and will be used as the main reconnaissance tool of this project. 
+
+\subsection{Limitations}
+TODO
+
+\subsection{Research approach}
+As the main goals for the project is to find methods suitable for identifying devices within the constraints, and to use these methods to identify how many devices can be found. The first step will be to get familiar with the Open-source Intelligence tools useful for the purpose of identifying and analyzing devices connected to the internet. Then research will be made to see what methods already exist. These methods will be tested with the constraints. Then the student will consult the supervisors from both DNV-GL and NTNU for thoughts on the methods found, and for ideas for new methods. Changes will be made to the old methods according to the feedback. Then both the old and the new methods will be tested again. After this, the student will again look for new methods to try, completing the loop as illustrated in \cref{fig:workflow} This process will be repeated until the interested parties are satisfied.
 
 
-\subsubsection{NTNU}\label{sec:ntnu}
-The Norwegian University of Technology and Science, with the Norwegian abbreviation NTNU, is the largest university in Norway, and has 75 percent of the technology master candidates in the country. This projects mainly takes place on the Trondheim Campus.
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+\begin{tabular}{p{10cm}}
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,427); %set diagram left start at 0, and has height of 427
+
+%Shape: Ellipse [id:dp8381675984532289] 
+\draw   (107.5,211) .. controls (107.5,182.28) and (131.12,159) .. (160.25,159) .. controls (189.38,159) and (213,182.28) .. (213,211) .. controls (213,239.72) and (189.38,263) .. (160.25,263) .. controls (131.12,263) and (107.5,239.72) .. (107.5,211) -- cycle ;
+%Shape: Ellipse [id:dp8879090651544747] 
+\draw   (236.5,86) .. controls (236.5,57.28) and (260.12,34) .. (289.25,34) .. controls (318.38,34) and (342,57.28) .. (342,86) .. controls (342,114.72) and (318.38,138) .. (289.25,138) .. controls (260.12,138) and (236.5,114.72) .. (236.5,86) -- cycle ;
+%Shape: Ellipse [id:dp159469530573498] 
+\draw   (365.5,212) .. controls (365.5,183.28) and (389.12,160) .. (418.25,160) .. controls (447.38,160) and (471,183.28) .. (471,212) .. controls (471,240.72) and (447.38,264) .. (418.25,264) .. controls (389.12,264) and (365.5,240.72) .. (365.5,212) -- cycle ;
+%Shape: Ellipse [id:dp6243045365348194] 
+\draw   (237.5,337) .. controls (237.5,308.28) and (261.12,285) .. (290.25,285) .. controls (319.38,285) and (343,308.28) .. (343,337) .. controls (343,365.72) and (319.38,389) .. (290.25,389) .. controls (261.12,389) and (237.5,365.72) .. (237.5,337) -- cycle ;
+%Straight Lines [id:da3764417411513329] 
+\draw    (193.5,169) -- (246.03,120.36) ;
+\draw [shift={(247.5,119)}, rotate = 497.2] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da08718773032378624] 
+\draw    (384.5,254) -- (332.97,301.64) ;
+\draw [shift={(331.5,303)}, rotate = 317.25] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da9455012657988889] 
+\draw    (331.5,120) -- (383.05,168.63) ;
+\draw [shift={(384.5,170)}, rotate = 223.32999999999998] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da04085276077852196] 
+\draw    (247.5,302) -- (194.95,252.37) ;
+\draw [shift={(193.5,251)}, rotate = 403.36] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (259.25,67) node [anchor=north west][inner sep=0.75pt]   [align=left] {\begin{minipage}[lt]{41.865356pt}\setlength\topsep{0pt}
+    \begin{center}
+    Test \\methods
+        \end{center}
+
+    \end{minipage}};
+% Text Node
+\draw (117.75,192) node [anchor=north west][inner sep=0.75pt]   [align=left] {\begin{minipage}[lt]{59.42064400000001pt}\setlength\topsep{0pt}
+    \begin{center}
+    Advise from \\supervisors
+        \end{center}
+
+    \end{minipage}};
+% Text Node
+\draw (385.25,203.5) node [anchor=north west][inner sep=0.75pt]   [align=left] {\begin{minipage}[lt]{46.398644000000004pt}\setlength\topsep{0pt}
+    \begin{center}
+    Research
+        \end{center}
+
+    \end{minipage}};
+% Text Node
+\draw (260.25,318) node [anchor=north west][inner sep=0.75pt]   [align=left] {\begin{minipage}[lt]{41.865356pt}\setlength\topsep{0pt}
+    \begin{center}
+    Test \\methods
+        \end{center}
+
+    \end{minipage}};
 
 
-\subsection{Project goal}\label{sec:goal}
-\textbf{The goal of this project is to map Cyber-Physical Systems(CPS) in the European maritime and offshore industry that is reachable through the internet, and by doing so get an overview of the exposure of these cyber-physical systems.}
+\end{tikzpicture}
 
+\captionof{figure}{Illsutration of workflow}
+\label{fig:workflow}
+\end{tabular}
+
+\subsection{Structure of report}
+TODO
 
 \subsection{Definition of important terms} \label{sec:definitions}
-
 \subsubsection{Cyber-Physical Systems(CPS)}\label{sec:cps}
 Cyber-Physical Systems(CPS) can be defined as "engineered systems that integrate information technologies, real‐time control subsystems, physical components, and human operators to influence physical processes by means of cooperative and (semi)automated control functions."~\cite{guzman_wied_kozine_lundteigen_2019}
 CPS is a broad term, and examples can be everything automated control systems at offshore platforms to the computer system in an electric car. As more and more of the CPSs are connected to the internet, cyber threats becomes a bigger challenge. 
 
 \subsubsection{Open-Source Intelligence(OSINT)}\label{sec:osint}
 Open-Source Intelligence(OSINT) is defined by the American Office of The Director of National Intelligence in their Intelligence Community Directive as: "[Intelligence] produced from publicly available information that is collected, exploited, and disseminated in a timely manner to an appropriate audience for the purpose of addressing a specific intelligence requirement."\cite{directive_301} This directive also defines Open Source Information as "Publicly available information that anyone can lawfully obtain by request, purchase, or observation.". Open-Source Intelligence (OSINT) is therefore gathering of intelligence that is lawfully available to the public. 
-
-
-\subsection{Project definition}
-
-
 

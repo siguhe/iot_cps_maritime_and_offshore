@@ -98,12 +98,16 @@
 %% Table of contents
 \thispagestyle{empty} % Avoid page numbering on the table of contents.
 \linespread{1.15}
+
 \newpage
-\tableofcontents{}
+\input{beginning}
+\newpage
+\tableofcontents
+
 \def\tableofcontentsname{test}
 \thispagestyle{empty} % Avoid page numbering on the table of contents.
 
-
+\newpage
 %%% Main content %%%
 %\newpage
 \setcounter{page}{1}
@@ -129,7 +133,7 @@
 \newpage
 \begin{appendices} \label{appendix}
 \input{"appendix/dictionary"}
-\input{"appendix/project_announcement"}
+%\input{"appendix/project_announcement"}
 \input{appendix/code_snippets}
 \input{"appendix/search_filters"}
 \input{"appendix/banner_example"}
