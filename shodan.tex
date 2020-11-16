@@ -1,4 +1,4 @@
-\section{Shodan}\label{sec:shodan}
+\subsection{Shodan}\label{sec:shodan}
 It is possible to make a up to 5 queries using Shodan without registering an account. 
 With a free account, it is possible to perform more queries, access to the Shodan API, and limited access to search filters. However, without a paid account, the website can has limited use.
 Using the API, a free user can access up to 100 results from searches. 
@@ -6,7 +6,7 @@ For paid users, there are three payment plans: Freelancer, Small Business and Co
 Users paying for the higher tiers can get from 20 million to unlimited amount of results, all search filters and multiple extra benefits. 
 1 million results per month will be sufficient for the scope of this project.
 
-\subsection{Crawlers and banners}
+\subsubsection{Crawlers and banners}
 Shodan have bots called "crawlers" to find information about devices connected to the internet, such as IP address, port number, country, service running, version, protocols used, and more. 
 All these properties are saved in Shodan "banners" . The creator of Shodan, John Matherly has described banners as "A banner is simply metadata about a service.". \cite{banner} 
 Therefore, when a user start a search using the Shodan search engine, it will not return live results, but rather the banners already saved in the Shodan database. Shodan guarantees that returned banners is collected in the last 30 days.\cite{matherly_guide_to_shodan}
@@ -23,7 +23,7 @@ Matherly\cite{matherly_guide_to_shodan} describes the basic algorithm for Shodan
 The list of ports mentioned can be found by using the API web call in \cref{lst:api_ports}.
 
 
-\subsection{Search filters} \label{sec:filters}
+\subsubsection{Search filters} \label{sec:filters}
 To limit the results returned from a Shodan query, filters are applied. Filters are on the format:
 \begin{lstlisting}
 filter_property: value
