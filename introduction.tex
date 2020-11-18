@@ -16,11 +16,13 @@ To explore the extent of this challenge, the first step is to identify how many 
 Since all publicly available devices can be found quite easily, the difficult part will be to recognize devices within the constraints.
 Open-source intelligence(OSINT) is utilized to find these CPS. The OSINT search engine \href{https://shodan.io}{\color{blue}{Shodan}} is a popular search engine for enumerating Internet-connected systems, and will be used as the main reconnaissance tool of this project. 
 
-\subsection{Limitations}
+\subsection{Limitations and assumptions}
 TODO
+Assumption: We assume that devices connected to the internet that we discover have an IP address.
 
 \subsection{Research approach}
 As the main goals for the project is to find methods suitable for identifying devices within the constraints, and to use these methods to identify how many devices can be found. The first step will be to get familiar with the Open-source Intelligence tools useful for the purpose of identifying and analyzing devices connected to the internet. Then research will be made to see what methods already exist. These methods will be tested with the constraints. Then the student will consult the supervisors from both DNV-GL and NTNU for thoughts on the methods found, and for ideas for new methods. Changes will be made to the old methods according to the feedback. Then both the old and the new methods will be tested again. After this, the student will again look for new methods to try, completing the loop as illustrated in \cref{fig:workflow} This process will be repeated until the interested parties are satisfied.
+Articles for the research was mainly found by using the search engines Engineering Village\cite{engineering_village} and Google Scholar\cite{google_scholar}. During the research, however, it was found that some OSINT techniques was easier to find in online blogs. These were found by utilizing the DuckDuckGo internet search engine\cite{ddg}. 
 
 
 \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
@@ -86,8 +88,7 @@ As the main goals for the project is to find methods suitable for identifying de
 \label{fig:workflow}
 \end{tabular}
 
-\subsection{Structure of report}
-TODO
+
 
 \subsection{Definition of important terms} \label{sec:definitions}
 \subsubsection{Cyber-Physical Systems(CPS)}\label{sec:cps}
@@ -97,3 +98,7 @@ CPS is a broad term, and examples can be everything automated control systems at
 \subsubsection{Open-Source Intelligence(OSINT)}\label{sec:osint}
 Open-Source Intelligence(OSINT) is defined by the American Office of The Director of National Intelligence in their Intelligence Community Directive as: "[Intelligence] produced from publicly available information that is collected, exploited, and disseminated in a timely manner to an appropriate audience for the purpose of addressing a specific intelligence requirement."\cite{directive_301} This directive also defines Open Source Information as "Publicly available information that anyone can lawfully obtain by request, purchase, or observation.". Open-Source Intelligence (OSINT) is therefore gathering of intelligence that is lawfully available to the public. 
 
+\subsection{Structure of report}
+This report has five main parts. First, in this section, \cref{sec:intro}, the project is introduced. In \cref{sec:theory}, basic prinicples used in this project is explained. Important prinicples from the working og the internet is explained, along with the basics of the Shodan search engine. In \cref{sec:method} different approaches for selective identification of IP devices are outlined. In \cref{sec:results} the results from using the afforementioned approaches are listed, along discussion of these results. Lastly, in \cref{sec:conclusion} a conclusion is drawn from the results, along with suggestions for further work on the topic.
+
+\newpage
