@@ -1,4 +1,4 @@
-\section{Theory}
+\section{Theory} \label{sec:theory}
 
 \subsection{IPv4}
 To navigate the internet, the IP protocol is used. This is mainly split into the popular IPv4 and the new IPv6. IPv4 addresses are 32 bit, meaning they can range from 0.0.0.0 to 255.255.255.255. 
@@ -8,13 +8,6 @@ IPv6 is an extended version of IPv4, and has has $2^{128}$ unique addresses. IPv
 
 \subsection{IP ranges}
  The IPv4 addresses are sold to organisations, for them to distribute further. For example, an Internet Service Provider (ISP) like Telenor will give IPv4 addresses to the customers while they use their subscribed internet connections. This distribution of IPv4 addresses to organisations is illustrated in \cref{fig:ipv4_map}.
-
-\begin{figure}
-    \centering
-    \includegraphics[scale=4]{Figurer/map_of_the_internet.jpg}
-    \caption{A map of the IPv4 space, from the XKCD webcomic. \cite{xkcd} }
-    \label{fig:ipv4_map}
-\end{figure}
 
 \subsubsection{IPv4 exhaustion and NAT}
 IPv4 addresses were distributed by the Internet Assigned Numbers Authority (IANA). 11 January, 2011, IANA allocated its last block.\cite{exhasuted_IPV4} Since then, the regional bodies responsible for allocationg IPv4 addresses, Regional Internet Registries (RIR), have also exhausted their IPv4 addresses, the last one in 2019.\cite{exhausted_RIPENNC} Due to this problem, multiple methods are used to get the most out of the IPv4 address space. Arguably, the most popular of these methods are Network Address Translation (NAT). IPv6 was also designed to solve the IPv4 exhaustion challenge.
@@ -77,3 +70,5 @@ NAT\\Router
  Classless Inter-Domain Routing(CIDR) is the modern way to split the IPv4 address space into blocks, so that they can be distributed. A CIDR block can look like this: "93.192.0.0/10". This block has two parts, the prefix "93.192.0.0" and the suffix "/10". The prefix indicates the size of the CIDR block. The prefix indicates where in the IPv4 space the CIDR block is located. To understand this, it is useful to look at an IP address in binary instead of decimal. For example, the IPv4 address "93.220.107.30" becomes "01011101.11011100.01101011.00011110". The suffix decides how many bits are fixed. In the CIDR block "93.220.107.30/10", the 10 first bits of the prefix "93.220.107.30"  are "01011101.11xxxxxx.xxxxxxxx.xxxxxxxx". This number span the binary range \\ \{01011101.11111111.11111111.11111111 - 01011101.11000000.00000000.00000000 \}, or the decimal range  \{ 93.192.0.1 - 93.255.255.254 \}. Remark that not the full prefix is needed; "93.220.107.30/10" and "93.220.107.31/10" are the same CIDR  block. Because of this, it is normal to set the changing bits of the prefix to 0, as in: "93.192.0.0/10". 
 Since the sizes of CIDR blocks vary, they can be nested. For example, "93.192.0.0/11" is a part of "93.192.0.0/10".
 
+
+\newpage
