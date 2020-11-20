@@ -13,13 +13,13 @@ From these results, the CPS should be separated. This is explained in \cref{sec:
 \subsubsection{Banner similarities} \label{sec:banner_method}
 When connecting a device to the internet, it needs to be configured. The installer needs competence to do this properly, and to spend time to perform the installation. To make such devices more accessible and efficient, finished solutions are most often used. Due to this, the same devices mostly have the same default configuration, and therefore the same banners. This can be used to identify devices within the chosen constraints by using the following method.
 \begin{enumerate}
-    \item Identify a device fulfill the constraints and is connected to the internet.
-    \item Find the IP address of said device, and find its Shodan entry.
+    \item Choose a device type that fulfill the constraints and may be connected to the internet.
+    \item Find the IP address of one instance of such a device, and find its Shodan entry.
     \item Get its banner.
     \item Use unique information from the banner to find all devices with similar banners.
 \end{enumerate}
 The most difficult of these steps is to find the IP address. The easiest way to do this is to own a device and find its IP address. Unfortunately, this project does not have access to any devices that fit the constraints set.
-If this is not an option, the device would be found by guessing what information could be found in its banner, for example the device name or ports it has open.
+If this is not an option, the device could be found by guessing what information could be found in its banner, for example the device name or ports it has open.
 
 
 \subsubsection{Internet Service Provider and IP ranges} \label{sec:isp_method}
