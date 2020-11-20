@@ -1,7 +1,22 @@
-\section{Results} \label{sec:results}
+\section{Implementation and results} \label{sec:results}
+This project implemented the different approaches to selective identification of IP devices proposed in \cref{sec:method}. These implementations, along with a discussion of the results, will be described here. 
+
 \subsection{Banner similarities}
+Following the approach proposed in \cref{sec:banner_method}, the first step is to choose a type of device that could fit the constraints of this project. Two methods was used to find a such a device. The first one was to find other research into the same area, and look at their results. Google Scholar\cite{google_scholar} and Engineering Village\cite{engineering_village} was used in search for articles on the subject, while DuckDuckGo\cite{ddg} was used to search for other sources. A powerpoint presentation from the Hack In The Box Security Conference 2018 was found, named \textit{Hacking yachts remotely}. This presentation illustrates different methods to hack Yachts. Here the search query "Maritime Sabolized Antenna System" was used to find internet connected antennaes of the model "Cobham Seatel Satcom". 
+"Marine Stabilized Antenna System" would then be an identifying part of the banner of this device. The 22 results found when using Shodan to search for this can be found in \cref{fig:banner_parsing}. Note that all devices run on the same port: 161, which is used for the Simple Network Management Protocol (SNMP). This will be looked further into in \cref{sec:combo}.
+
+\begin{figure} [H]
+    \centering
+    \includegraphics[scale=0.4]{Figurer/banner_parsing.png}
+    \caption{Using the Shodan CLI to download and parse results. Results are listed with IP addresses, open ports and ISP.}
+    \label{fig:banner_parsing}
+\end{figure}
+
 \subsection{ISP}
+\todo[inline]{write this chapter}
+
 \subsection{Reverse Geolocation}
+\todo[inline]{Finish this chapter}
 
 With many major seaports, like Rotterdam, Antwerp and Hamburg, the North Sea has a lot of marine traffic. The sea also has a lot of offshore oil and gas fields; Ekofisk, Sleipner, Forties and Valhall, to mention a few.\cite{oil_field_lists} With this much activity within both constraints, the marine and offshore industries, a lot of things in the area have to be connected to the internet. To test if the IP geolocation services of Shodan could detect devices connected to the internet, a large area of the North sea was chosen: a circle with 270 km around 56\degree24\textquotesingle00.0N 3\degree00\textquotesingle36.0E, as seen in \cref{fig:geolocation}. To use Shodan to find devices within this area, the command \cref{lst:geolocation_sea} was used. As seen in the output from the command, no devices was found within the area.
 
@@ -13,10 +28,13 @@ With many major seaports, like Rotterdam, Antwerp and Hamburg, the North Sea has
 \end{figure}
 
 \subsection{Latency and traceroute}
+\todo[inline]{write this chapter}
 \subsection{Problems}
 \subsubsection{NAT}
 Due to NAT connecting devices to the internet trough a single router, Shodan will only scan the outer NAT routing device, and not the devices behind the NAT. NAT is not always used for getting more IPv4 addresses. Sometimes it is used purposely to hide IPv4 addresses from the public internet.
 
 \subsubsection{firewalls}
+\todo[inline]{Maybe write this chapter}
 
-
+\subsection{Combination of methods} \label{sec:combo}
+\todo[inline]{Maybe write this chapter}
