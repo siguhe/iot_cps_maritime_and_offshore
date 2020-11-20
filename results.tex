@@ -1,6 +1,7 @@
 \section{Implementation and results} \label{sec:results}
 This project implemented the different approaches to selective identification of IP devices proposed in \cref{sec:method}. These implementations, along with a discussion of the results, will be described here. 
 
+
 \subsection{Banner similarities}
 Following the approach proposed in \cref{sec:banner_method}, the first step is to choose a type of device that could fit the constraints of this project. Two methods was used to find a such a device. The first one was to find other research into the same area, and look at their results. Google Scholar\cite{google_scholar} and Engineering Village\cite{engineering_village} was used in search for articles on the subject, while DuckDuckGo\cite{ddg} was used to search for other sources. A powerpoint presentation from the Hack In The Box Security Conference 2018 was found, named \textit{Hacking yachts remotely}. This presentation illustrates different methods to hack Yachts. Here the search query "Maritime Sabolized Antenna System" was used to find internet connected antennaes of the model "Cobham Seatel Satcom". 
 "Marine Stabilized Antenna System" would then be an identifying part of the banner of this device. The 22 results found when using Shodan to search for this can be found in \cref{fig:banner_parsing}. Note that all devices run on the same port: 161, which is used for the Simple Network Management Protocol (SNMP). This will be looked further into in \cref{sec:combo}.
@@ -15,8 +16,72 @@ Following the approach proposed in \cref{sec:banner_method}, the first step is t
 In the millions of devices connected to the internet, 22 devices is not really very many. However, this is the most accurate device identification this project was able to do. While the other approaches are also able to identify devices, it is not ceritan that those are a part of the offshore or maritime industries. The Cobham Seatel Satcom antenna is definetly a part of the navigation system of a ship, which is a maritime Cyber-Physical System. This one result was also one not found by this project, but by another project. More specifically, it was found by someone who has more insight into the industry, showing that device identification by banner specification is easier with experience from area of work within the constraints.
 
 \subsection{ISP}
-For identifying devices by looking at Internet Service Providers (ISP), DNV-GL suggested to look into Tampnet. On their webpage, the follwing can be found: "By providing a fast subsea fibre optic network and 4G LTE coverage, Tampnet enables digitalization of offshore operations within oil & gas, maritime and wind energy." \cite{tampnet} Tampnet is an ISP that provides internet connections to the maritime, offshore and wind energy industries. 
-\todo[inline]{Finish this chapter}
+For identifying devices by looking at Internet Service Providers (ISP), DNV-GL suggested to look into Tampnet. On their webpage, the follwing can be found: "By providing a fast subsea fibre optic network and 4G LTE coverage, Tampnet enables digitalization of offshore operations within oil \& gas, maritime and wind energy." \cite{tampnet} Tampnet is an ISP that provides internet connections to the maritime, offshore and wind energy industries. 
+
+\begin{figure} [H]
+    \centering
+    \includegraphics[scale=0.35]{Figurer/python_ports.png}
+    \caption{The output from a python script that is counting the different number of ports open by the devices returned from the Shodan query "isp:tampnet". The script is "count\_ports.py" at \cite{scripts}}
+    \label{fig:tampnet_ports}
+\end{figure}
+
+This query returns 92 different IP addresses belonging to Tampnet. This approach is not definitive, however, since there is no way of knowing if these devices are a part of a cyber-physical system in the offshore industry. Even so, these 92 devices has a higher chance of being within the constraints than other random devices on the internet. This method will thus act more as a filter for finding potential hits. 
+
+The HackerTargets AS lookup tool \cite{asip_lookup} is used to find that Tampnet own the CIDR range "185.96.40.0/22", which is 1024 available IP addresses. \cite{CIDR_table} Therefore, Tampnet probably has more than 92 active IP addresses as part of their ISP. Shodan can not find the rest of the IP addresses of Tampnet since they can not be reached from the public internet. One reason for this could be that Tampnet employs a firewall to filter what IP addresses are able to find their address. This is called whitelisting, where only a selected number of devices can communicate through the router with a firewall, as illustrated in \cref{fig:firewall}.
+
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
+\begin{tabular}{p{10cm}}
+   \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+     %uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+
+%Shape: Rectangle [id:dp7550808737565868]
+\draw   (417.5,74) -- (473,74) -- (473,124) -- (417.5,124) -- cycle ;
+
+%Shape: Ellipse [id:dp5744265006375734]
+\draw   (258,165) .. controls (258,145.67) and (273.67,130) .. (293,130) .. controls (312.33,130) and (328,145.67) .. (328,165) .. controls (328,184.33) and (312.33,200) .. (293,200) .. controls (273.67,200) and (258,184.33) .. (258,165) -- cycle ;
+
+%Straight Lines [id:da011152119100300673]
+\draw    (418.5,100) -- (323.5,146) ;
+%Shape: Rectangle [id:dp019726233695570805]
+\draw   (414.5,214) -- (470,214) -- (470,264) -- (414.5,264) -- cycle ;
+
+%Shape: Rectangle [id:dp2854982925574172]
+\draw   (415.5,139) -- (471,139) -- (471,189) -- (415.5,189) -- cycle ;
+
+%Straight Lines [id:da042657718924057675]
+\draw    (414.5,164) -- (328,165) ;
+%Straight Lines [id:da8590380439733557]
+\draw    (414.5,235) -- (322.5,187) ;
+%Shape: Cloud [id:dp5209862047408297]
+\draw   (49.88,163.36) .. controls (48.82,157.4) and (52.27,151.49) .. (58.76,148.15) .. controls (65.25,144.81) and (73.64,144.62) .. (80.36,147.67) .. controls (82.74,144.2) and (87.1,141.8) .. (92.13,141.21) .. controls (97.15,140.61) and (102.24,141.88) .. (105.86,144.64) .. controls (107.89,141.49) and (111.87,139.38) .. (116.4,139.05) .. controls (120.93,138.71) and (125.35,140.21) .. (128.11,143.01) .. controls (131.78,139.67) and (137.61,138.27) .. (143.09,139.4) .. controls (148.57,140.54) and (152.7,144) .. (153.71,148.31) .. controls (158.2,149.25) and (161.95,151.66) .. (163.97,154.91) .. controls (166,158.15) and (166.1,161.92) .. (164.27,165.23) .. controls (168.7,169.68) and (169.73,175.61) .. (166.99,180.8) .. controls (164.25,186) and (158.14,189.68) .. (150.95,190.48) .. controls (150.9,195.35) and (147.44,199.83) .. (141.9,202.17) .. controls (136.37,204.52) and (129.62,204.38) .. (124.26,201.79) .. controls (121.98,207.63) and (115.55,211.93) .. (107.76,212.83) .. controls (99.97,213.73) and (92.21,211.06) .. (87.83,205.99) .. controls (82.46,208.49) and (76.02,209.21) .. (69.96,207.99) .. controls (63.9,206.77) and (58.74,203.7) .. (55.62,199.49) .. controls (50.14,199.99) and (44.84,197.79) .. (42.35,194) .. controls (39.86,190.2) and (40.71,185.61) .. (44.49,182.5) .. controls (39.59,180.28) and (37.1,175.87) .. (38.3,171.56) .. controls (39.5,167.26) and (44.13,164.05) .. (49.76,163.59) ; \draw   (44.49,182.5) .. controls (46.8,183.55) and (49.46,184.03) .. (52.13,183.87)(55.62,199.49) .. controls (56.77,199.39) and (57.89,199.17) .. (58.97,198.84)(87.83,205.99) .. controls (87.02,205.06) and (86.34,204.06) .. (85.81,203.01)(124.26,201.79) .. controls (124.67,200.73) and (124.95,199.63) .. (125.06,198.52)(150.95,190.48) .. controls (151.01,185.28) and (147.19,180.53) .. (141.14,178.26)(164.27,165.23) .. controls (163.29,167) and (161.79,168.57) .. (159.9,169.81)(153.71,148.31) .. controls (153.88,149.02) and (153.95,149.75) .. (153.94,150.47)(128.11,143.01) .. controls (127.2,143.84) and (126.44,144.77) .. (125.87,145.77)(105.86,144.64) .. controls (105.37,145.39) and (105.01,146.19) .. (104.77,147.02)(80.36,147.67) .. controls (81.78,148.31) and (83.1,149.09) .. (84.28,149.97)(49.88,163.36) .. controls (50.02,164.19) and (50.25,165) .. (50.56,165.79) ;
+
+%Straight Lines [id:da9624009852798121]
+\draw    (162.5,168) -- (258,165) ;
+
+% Text Node
+\draw (293,165) node   [align=left] {\begin{minipage}[lt]{33.354pt}\setlength\topsep{0pt}
+\begin{center}
+Router\\ with \ firewall
+\end{center}
+
+\end{minipage}};
+% Text Node
+\draw (445.25,99) node   [align=left] {Device};
+% Text Node
+\draw (442.25,239) node   [align=left] {Device};
+% Text Node
+\draw (443.25,164) node   [align=left] {Device};
+% Text Node
+\draw (59,163) node [anchor=north west][inner sep=0.75pt]   [align=left] {The Internet};
+
+   \end{tikzpicture}
+   \captionof{figure}{Illustration of firewall functionality}
+   \label{fig:firewall}
+\end{tabular}
+
+
+
 
 \subsection{Reverse Geolocation}
 \todo[inline]{Finish this chapter}
