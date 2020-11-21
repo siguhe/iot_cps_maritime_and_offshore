@@ -4,7 +4,7 @@
 With a higher than ever number for devices connected to the internet than ever\cite{iot_stats}, more devices are vulnerable than ever. Many do not want an wireless lock on their house, since there is a chance it can be hacked by malicious parties. The lock must of course be secure and resistant to attacks, but it is hard to make something a hundred percent secure. The same challenge is even more important for industrial systems, where loss of money, damage to the environment or even loss of life can be consequences of system failure. There are already many examples of cyber-attacks on industrial systems, for example STRUXNET\cite{struxnet}, a computer worm that infected an Iranian nuclear facility. 
 As with other industries, the marine and offshore industries are connecting more parts of their Cyber-Physical Systems(CPS) to the internet to improve their efficiency. While a lot of the Cyber-Physical Systems connected to the internet are well maintained and secure, many other are vulnerable. This is most often because the CPSs are not set up properly or run outdated software. Other than this, it is a "fact" of statistics that if a quantity Cyber-Physical Systems are connected to the internet, a portion of these will be insecure. 
 
-IEC62443 describes preliminary recommednations and guidance for the use of cybersecurity technology and countermeasures. To stay as secure as possible, the industries should apply these measures.\cite{IEC62443} Among other things, it spesifies that firewalls should be added to systems that have the ability to "[Filter] IP-addresses on the outside allowed on the inside and vice versa". And filter "[ports and] applications allowed for communication". In other words, only devices that have a good reason for beeing connected to the Internet should be connected. 
+IEC62443 describes preliminary recommendations and guidance for the use of cybersecurity technology and countermeasures. To stay as secure as possible, the industries should apply these measures.\cite{IEC62443} Among other things, it specifies that firewalls should be added to systems that have the ability to "[Filter] IP-addresses on the outside allowed on the inside and vice versa". And filter "[ports and] applications allowed for communication". In other words, only devices that have a good reason for being connected to the Internet should be connected. 
 
 \subsection{Objectives}
 To explore the extent of this challenge, the first step is to identify how many CPSs can be reached. The goal is to list methods to discover Cyber Physical Systems in the maritime and offshore industries, and map how many of said systems can be discovered. From this the constraints are formulated:
@@ -18,10 +18,10 @@ Open-source intelligence(OSINT) is utilized to find these CPS. The OSINT search 
 
 \subsection{Limitations and assumptions} \label{sec:limits}
 In \cref{sec:ipv6} it is assumed that industries in the offshore and maritime industries will not use a significant amount of IPv6. This is based on the findings from when this report is written, and the situation will hopefully change in the coming years. However, due to this, IPv6 was not investigated as thoroughly as IPv4.
-Shodan is used as the main OSINT tool in this report. Any shortcommings of this tool will also affect the work of this project.
+Shodan is used as the main OSINT tool in this report. Any shortcomings of this tool will also affect the work of this project.
 There are other tools available as well. Some of them has the same functionality as Shodan, like \href{https://censys.io/}{\color{blue}{Censys}}\cite{censys} and \href{www.zoomeye.org}{\color{blue}{ZoomEye}}\cite{zoomeye}. Other tools, like the Traceroute tool used in \cref{sec:latency_method}, covers functionality that Shodan do not. There is many available OSINT tools available, and while Shodan was assessed to be the most fitting to this project, parts of it might be easier or more efficient to do with other tools. Tools not mentioned in the report were either not found or evaluated as not relevant.
-Honeypot technology is to make a computer pretend to be another device. This is often done to do statistics on atempts to access the impersonated systems are done. This method is quite popular for use on CPS, and during the research of this porject, multiple other articles were found that set up honeypots as part of their research.\cite{bodenheim_butts_dunlap_mullins_2014}\cite{ICS_shodan_article} There is therefore a chance that some of the devices found by Shodan is in reality fake. Shodan has a method for identifying honeypots, but it is not foolproof.
-A device connected to the internet might have multiple different IP addressess associated with it. In this project, it is assumed that every IP address is a single device, as this is usually the case.
+Honeypot technology is to make a computer pretend to be another device. This is often done to do statistics on attempts to access the impersonated systems are done. This method is quite popular for use on CPS, and during the research of this project, multiple other articles were found that set up honeypots as part of their research.\cite{bodenheim_butts_dunlap_mullins_2014}\cite{ICS_shodan_article} There is therefore a chance that some of the devices found by Shodan is in reality fake. Shodan has a method for identifying honeypots, but it is not foolproof.
+A device connected to the internet might have multiple different IP addresses associated with it. In this project, it is assumed that every IP address is a single device, as this is usually the case.
 
 
 \subsection{Research approach}
@@ -29,7 +29,8 @@ As the main goals for the project is to find methods suitable for identifying de
 Articles for the research was mainly found by using the search engines Engineering Village\cite{engineering_village} and Google Scholar\cite{google_scholar}. During the research, however, it was found that some OSINT techniques was easier to find in online blogs. These were found by utilizing the DuckDuckGo internet search engine\cite{ddg}. 
 
 
-\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+\tikzset{every picture/.style={line width=0.75pt}}
+ 
 \begin{tabular}{p{10cm}}
 
     \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
@@ -88,7 +89,7 @@ Articles for the research was mainly found by using the search engines Engineeri
 
     \end{tikzpicture}
 
-    \captionof{figure}{Illsutration of workflow}
+    \captionof{figure}{Illustration of workflow}
     \label{fig:workflow}
 \end{tabular}
 
@@ -97,7 +98,7 @@ Articles for the research was mainly found by using the search engines Engineeri
 \subsection{Definition of important terms} \label{sec:definitions}
 \subsubsection{Cyber-Physical Systems(CPS)}\label{sec:cps}
 This project will rely on the definition of CPS from \textit{Conceptualizing the key features of cyber‐physical systems in a multi‐layered representation for safety and security analysis}.~\cite{guzman_wied_kozine_lundteigen_2019}
-This artilce defines Cyber-Physical Systems(CPS) as "engineered systems that integrate information technologies, real‐time control subsystems, physical components, and human operators to influence physical processes by means of cooperative and (semi)automated control functions." CPS also has the three key features:
+This article defines Cyber-Physical Systems(CPS) as "engineered systems that integrate information technologies, real‐time control subsystems, physical components, and human operators to influence physical processes by means of cooperative and (semi)automated control functions." CPS also has the three key features:
 \begin{enumerate}
     \item Real-time feedback control of physical processes through sensors and actuators  
     \item Cooperative control among networked subsystems,and
@@ -109,6 +110,6 @@ This defines CPS as a broad term, and examples can be everything from the contro
 Open-Source Intelligence(OSINT) is defined by the American Office of The Director of National Intelligence in their Intelligence Community Directive as: "[Intelligence] produced from publicly available information that is collected, exploited, and disseminated in a timely manner to an appropriate audience for the purpose of addressing a specific intelligence requirement."\cite{directive_301} This directive also defines Open Source Information as "Publicly available information that anyone can lawfully obtain by request, purchase, or observation.". Open-Source Intelligence (OSINT) is therefore gathering of intelligence that is lawfully available to the public. 
 
 \subsection{Structure of report}
-This report has five main parts. First, in this section, \cref{sec:intro}, the project is introduced. In \cref{sec:theory}, basic prinicples used in this project is explained. Important prinicples from the working og the internet is explained, along with the basics of the Shodan search engine. In \cref{sec:method} different approaches for selective identification of IP devices are outlined. In \cref{sec:results} the results from using the afforementioned approaches are listed, along discussion of these results. Lastly, in \cref{sec:conclusion} a conclusion is drawn from the results, along with suggestions for further work on the topic.
+This report has five main parts. First, in this section, \cref{sec:intro}, the project is introduced. In \cref{sec:theory}, basic principles used in this project is explained. Important principles from the working of the internet is explained, along with the basics of the Shodan search engine. In \cref{sec:method} different approaches for selective identification of IP devices are outlined. In \cref{sec:results} the results from using the aforementioned approaches are listed, along discussion of these results. Lastly, in \cref{sec:conclusion} a conclusion is drawn from the results, along with suggestions for further work on the topic.
 
 \newpage
