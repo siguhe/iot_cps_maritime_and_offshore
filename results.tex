@@ -19,7 +19,7 @@ If this experience or access is not available, like in this project, a couple of
 Some techonologies are intended for specialized use. For example the NMEA communication standard for marine sensors and display units. \cite{NMEA} This will of course be mostly used in the marine industry. A shodan search for "NMEA" shows that 88 IP addresses have the word NMEA in their description. While some of those devices probably use NMEA to communicate, some might just have the letters "NMEA" in their banner as a coincidence. This can be the case with short search terms. The port 10110 is intended for NMEA 0183 Navigational Data. \cite{www_ports} A search for this port with Shodan returns 6 results, which is quite low. 
 It is possible to find devices that are used within a industry, in this case either maritime or offshore. These devices need to be specific for the industry, as findings will not be decisive if the devices can be found in used not within the constraints. To find the right devices, one approach can be to find producers or resellers of equipment for a specific industry. A list of manufacturers of NMEA equipment can be found at \cite{NMEA}. It is logical that some of these manufacturers would also make equipment for the marine industry that is not NMEA. 
 Some time of this project was spent in search of identifiable banners, but nothing as clear as the Maritime Sabolized Antenna System was found in the search. 
-\todo[inline]{Finish this section by adding results from table or smoething.}
+%\todo[inline]{Finish this section by adding results from table or smoething.}
 
 
 \subsection{ISP}
@@ -94,7 +94,7 @@ With many major seaports, like Rotterdam, Antwerp and Hamburg, the North Sea has
 
 \begin{figure} [H]
     \centering
-    \includegraphics[scale=0.7]{Figurer/geolocation.png}
+    \includegraphics[scale=0.5]{Figurer/geolocation.png}
     \caption{Shodan "geo" filter visualized. Map copyright: https://www.openstreetmap.org/copyright}
     \label{fig:geolocation}
 \end{figure}
@@ -114,21 +114,6 @@ As this project does not have access to any tools that index traceroute latencie
 Two points on this graph is worth mentioning. The first point (1), where the latency has a \~200ms jump, could be a undersea cable.From a Shodan query for the destination IP address, it is found to be in USA, so this is probably when the signal crosses the Atlantic Ocean. The next point on the graph (2), increase the latency by \~1000ms. As the antenna is connected to the internet via sattelite, this is probably when the signal travel from land, trough the sattelite to the antenna.
 
 With access to large datasets of traceroute latencies, it could be possible to identify devices that have big latency jumps. While this could not prove that a device is located at sea, it would be useful to find subsets of IP addresses that could be investigated further.
-
-\subsection{Comparison of methods}
-The different methods discussed in this section show different strengths and weaknesses. Here the main things to remember from each are shown in a list.
-
-\begin{outline}[itemize]
-        \1 Banner Similarities
-            \2 Pinpoint an exact device model
-            \2 Hard to find identifying device banner
-        \1 Internet Service Provider and IP ranges
-            \2 Will give a subset of devices possibly within constraints
-        \1 Reverse IP geolocation
-            \2 Does not work
-        \1 Latency and traceroute
-            \2 Can be used to give more confidence in identyfing a device.
-\end{outline}
 
 \subsection{Combination of methods} \label{sec:combo}
 As seen, different methods of identifying devices connected to the internet each have strengths and weaknessess. As the methods use different properties to investigate devices, they can be combined to find devices within the constraints. An example follows.
@@ -150,7 +135,7 @@ As mentioned in \cref{sec:banner_results}, the devices identified all used the s
 
 Both of these devices show the same jump in latency as the test in \cref{sec:latency_results}, indicating that the device could be connected trough sattelite. Due to this device also having a marlink IP address, the confidence is high that it is present on a ship in the maritime industry. Two of the constraints have been fulfilled: The system is connected to the internet, and is most likely part of the maritime industry. 
 
-Next step is to check for the last constraint: if the system is a Cyber-Physical System(CPS). The "data" field in the banners, as seen in \cref{fig:marlink_161_data}, show that one of the devices is labeled as a "Videoconferencing Device" and the other as a "RouterOS RB750". It should be mentioned that the system administrators owning these devices have the ability to write any label on them, so this could be a lie. This form of security trough obscurity have been advocated, for example in \cite{bodenheim_butts_dunlap_mullins_2014}. With this in mind, the labels are assumed to show the true nature of the devices. 
+Next step is to check for the last constraint: if the system is a Cyber-Physical System(CPS). The "data" field in the banners, as seen in \cref{fig:marlink_traceroute_data}, show that one of the devices is labeled as a "Videoconferencing Device" and the other as a "RouterOS RB750". It should be mentioned that the system administrators owning these devices have the ability to write any label on them, so this could be a lie. This form of security trough obscurity have been advocated, for example in \cite{bodenheim_butts_dunlap_mullins_2014}. With this in mind, the labels are assumed to show the true nature of the devices. 
 The videoconferencing device is defenitively not part of a CPS. 
 A search for the router shows that is is a MicroTik RB750 router, intended for office use.\cite{RB750} This means it is most likely part of a CPS, although this is not definitve. The router could still provide internet to devices in a CPS, making it a part of the CPS. It could also be providing internet access to an employees laptop, where the laptop in turn is connected to a CPS. Either way, there is no way to know for sure without gaining access to the router. Since it is connected to the internet, potential attacker have the ability to try and gain this access.
 
@@ -161,3 +146,4 @@ A search for the router shows that is is a MicroTik RB750 router, intended for o
     \label{fig:marlink_traceroute_data}
 \end{figure}
 
+\newpage

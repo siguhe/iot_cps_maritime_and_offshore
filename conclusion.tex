@@ -1,2 +1,34 @@
+\section{Conclusion} \label{sec:conclusion}
+This project had two main goals: To propose methods for identifying devices within some predefined constraints. And to use said methods to investigate how many devices withing the constraints defined in \cref{sec:intro} can be found. These devices would be potentionally vulnerable. 
+These constraints read as follows:
+\begin{itemize}
+    \item The device is part of a Cyber Physical System(CPS)
+    \item The device is connected to the internet
+    \item The device is part of either the maritime or offshore industries
+\end{itemize}
 
-\section{Concusion} \label{sec:conclusion}
+The different methods have different strengths and weaknesses. To summarice the most important characteristics of each method:
+
+\begin{outline}[itemize]
+    \setlength\itemsep{10em}
+        \1 Banner Similarities
+        \2 Pinpoint an exact device model
+        \2 Hard to find identifying device banner
+        \1 Internet Service Provider and IP ranges
+        \2 Will give a subset of devices possibly within constraints
+        \1 Reverse IP geolocation
+        \2 Does not work
+        \1 Latency and traceroute
+        \2 Can be used to give more confidence in identyfing a device.
+\end{outline}
+
+This shows that the proccess of identifying devices connected to the internet has many different sides, and it takes more than one approach to be able to identify a device.
+
+Even with these methods, the findings from \cref{sec:results} was either unconclusive or few. Filtering devices on the ISP Marlink proved to find most devices. However, it was difficult to know whether these devices was part of a Cyber-Pysical System(CPS) or not. Instead, the number of devices returned would be more useful for a subset to perfom further searches on. 
+
+On the other hand, the search for "Maritime Sabolized Antenna System" from \cref{sec:banner_results}, give few, but decisive identifications of devices. As stated in \cref{sec:intro}, more devices connected to the internet means that there is more potential vulnerabilities. Therefore, it is good that it is only possible to find a few online devices. These findings should not be seen as conclusive, as only a superfical search was performed, and many devices may still be connected to the internet, but not found by this project. As mentioned in \cref{sec:further_work}, a more thorough search would include automated scripts for either crawling the internet or parsing datasets. 
+
+
+Using traceroute to identify devices based on latency is not conclusive, but improves the chance that the right devices are found. This is the only tool that Shodan does not provide, which makes it interresting as a supplement. It should be mentioned that when Shodan queries is sent, they are found in a Shodan database. Shodan has made all the connections to find the devices. With traceroute however, a ping is sent from the device that runs the command. The information is real-time, and the IP address of the sender can be read by the device that receives the traceroute ping. It is not illegal to ping a computer available on the public internet. It is however, more anonymous to use Shodan. 
+
+All in all, the main product of this report is the defined methods for identifying devices connected to the internet, while the results from testing these methods should be viewed more as examples than conclusive results. 
