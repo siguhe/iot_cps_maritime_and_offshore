@@ -1,13 +1,9 @@
 \section{Selective identification of IP devices} \label{sec:method}
-The main goal of this project is to propose methods to identify devices that fulfill within the following constraints:
-\begin{itemize}
-    \item The device is connected to the internet 
-    \item The device is part of a Cyber Physical System(CPS)
-    \item The device is part of either the maritime or offshore industries
-\end{itemize}
-As all the work is done online, the first constraint will always be fulfilled using the workflow of this project. 
-Then several methods to filter devices based on industry is suggested in \cref{sec:identify_industry}. These methods are not exclusive, and multiple methods may for example be used to double-check the validity of the results.
-From these results, the CPS should be separated. This is explained in \cref{sec:identify_cps}.
+As described in \cref{sec:research_approach}, method is suggested to find devices as per the project goal. 
+This chapter describe these suggested methods, based on the foundation from \cref{sec:theory}.
+
+Several methods to filter devices based on industry is suggested in \cref{sec:identify_industry}. These methods are not exclusive, and multiple methods may for example be used to double-check the validity of the results. First, method on how to identify devices based on location and industry is suggested, in \cref{sec:identify_industry}. Then methods are suggested on how to identify if devices are part of a Cyber-Physical System, in \cref{sec:identify_cps}.
+
 
 \subsection{Identifying devices from specific industries} \label{sec:identify_industry}
 \subsubsection{Banner similarities} \label{sec:banner_method}
@@ -65,6 +61,7 @@ The traceroute is visualized in \cref{fig:latency}. Here the signal will travel 
 
 \subsection{Identifying devices from Cyber-Physical Systems} \label{sec:identify_cps}
 As mentioned in \cref{sec:cps}, Cyber-Physical Systems(CPS) is a system containing anything from real-time controllers to human operators. Not all CPS have components that are connected to the internet. When a CPS is connected to the internet, only some of its components are actually connected. In the offshore industry, CPS are typically Industrial Control Systems(ICS). In the maritime industry, CPS are typically navigation systems. As these industries often overlap, their CPS use cases often overlap as well. Approaches for identifying two subsections of CPS, ICS and navigation systems will be proposed below.
+These methods can be used standalone, but in this project they are intended for use on a subset of devices that are filtered from the methods suggested in \cref{sec:identify_industry}.
 
 \subsubsection{Industrial Control Systems}
 Industrial Control Systems(ICS) are mostly easy to identify. A lot of previous research already exist on Shodan and ICS. For example: \textit{Exploring Shodan From the Perspective of Industrial Control Systems}\cite{bodenheim_butts_dunlap_mullins_2014} and \textit{Evaluation of the ability of the Shodan search engine to identify Internet-facing industrial control devices} \cite{ICS_shodan_article}.  In addition, Shodan has a list of popular ICS systems, and search terms used to find the systems.\cite{shodan_ics} The different ICS use standard ports for communication trough the internet, and Shodan can use the "port" filter to find them. ICS also often has similar banners, and the same method as in \cref{sec:banner_method} would work on ICS.
