@@ -4,17 +4,28 @@
 With a higher than ever number for devices connected to the internet than ever\cite{iot_stats}, more devices are vulnerable than ever. Many do not want an wireless lock on their house, since there is a chance it can be hacked by malicious parties. The lock must of course be secure and resistant to attacks, but it is hard to make something a hundred percent secure. The same challenge is even more important for industrial systems, where loss of money, damage to the environment or even loss of life can be consequences of system failure. There are already many examples of cyber-attacks on industrial systems, for example STRUXNET\cite{struxnet}, a computer worm that infected an Iranian nuclear facility. 
 As with other industries, the marine and offshore industries are connecting more parts of their Cyber-Physical Systems(CPS) to the internet to improve their efficiency. While a lot of the Cyber-Physical Systems connected to the internet are well maintained and secure, many other are vulnerable. This is most often because the CPSs are not set up properly or run outdated software. Other than this, it is a "fact" of statistics that if a quantity Cyber-Physical Systems are connected to the internet, a portion of these will be insecure. 
 
-IEC62443 describes preliminary recommendations and guidance for the use of cybersecurity technology and countermeasures. To stay as secure as possible, the industries should apply these measures.\cite{IEC62443} Among other things, it specifies that firewalls should be added to systems that have the ability to "[Filter] IP-addresses on the outside allowed on the inside and vice versa". And filter "[ports and] applications allowed for communication". In other words, only devices that have a good reason for being connected to the Internet should be connected. 
+The IT security standard for industrial communication networks, IEC62443 describes preliminary recommendations and guidance for the use of cybersecurity technology and countermeasures. To stay as secure as possible, the industries should apply these measures.\cite{IEC62443} Among other things, it specifies that firewalls should be added to systems that have the ability to "[Filter] IP-addresses on the outside allowed on the inside and vice versa". And filter "[ports and] applications allowed for communication". In other words, only devices that have a good reason for being connected to the Internet should be connected. 
+
+DNV-GL is an independent expert in risk management and quality assurance, and has a big portion of their focus is on the maritime and offshore business. The DNV-GL has a Cyber Security team that helps customers assess and manage risks related to cyber security,~\cite{DNVGL_cybersec} and might have a interest in the findings of this project.
+
+The research in cybersecurity at NTNU is mostly done at the Department of Information Security and Communication Technology and  the Department of Computer Science. As cybersecurity is important, some focus should be put on the topic in other departments as well, where it is relevant. This is the case for the Department of Engineering Cybernetics, which have a lot of focus on computer systems, both for the industry and embedded systems. Project theses like this one can be a way for the departements to get more insight in the importance of cybersecurity.
 
 \subsection{Objectives}
-To explore the extent of this challenge, the first step is to identify how many CPSs can be reached. The goal is to list methods to discover Cyber Physical Systems in the maritime and offshore industries, and map how many of said systems can be discovered. From this the constraints are formulated:
-\begin{itemize}
-    \item The device is part of a Cyber Physical System(CPS)
-    \item The device is connected to the internet
-    \item The device is part of either the maritime or offshore industries
-\end{itemize}
-Since all publicly available devices can be found quite easily, the difficult part will be to recognize devices within the constraints.
-Open-source intelligence(OSINT) is utilized to find these CPS. The OSINT search engine \href{https://shodan.io}{\color{blue}{Shodan}} is a popular search engine for enumerating Internet-connected systems, and will be used as the main reconnaissance tool of this project. 
+The goal of this project is to map of Cyber-Physical Systems(CPS) in the maritime and offshore industry that is reachable trough the internet, and by doing so get an overview of the exposure of these cyber-physical systems.
+
+This goal was split into tasks, which define that this project should
+\begin{enumerate}
+    \item Introduce and define some key terms and concepts related to cybersecurity
+    \item Explain what is meant by a cyber-physical system and why cybersecurity is a topic of concern for such systems.
+    \item Identify and explain search tools that can be used to identify publicly cyber-physical systems, with the focus on the equipment and systems used in the maritime and offshore oil and gas industry. 
+    \item Prepare a specification for how a search can be carried out in one or more of the identified tools. Explain the rationales for the choices made in relation to the search, for example for delimiting the outcomes.
+    \item Document the results from applying the tools and elaborate on the findings.
+    \item Identify potential topics that may require further research, based on the findings and in collaboration with the supervisors.
+\end{enumerate}
+
+Since all publicly available devices can be found quite easily, the difficult part will be to recognize devices within the constraints of CPS in the maritime and offshore industries.
+Open-source intelligence(OSINT) is utilized to map these CPS. The OSINT search engine \href{https://shodan.io}{\color{blue}{Shodan}}\cite{shodan} is a popular search engine for enumerating Internet-connected systems, and will be used as the main reconnaissance tool of this project. 
+
 
 \subsection{Limitations and assumptions} \label{sec:limits}
 In \cref{sec:ipv6} it is assumed that industries in the offshore and maritime industries will not use a significant amount of IPv6. This is based on the findings from when this report is written, and the situation will hopefully change in the coming years. However, due to this, IPv6 was not investigated as thoroughly as IPv4.
@@ -24,9 +35,14 @@ Honeypot technology is to make a computer pretend to be another device. This is 
 A device connected to the internet might have multiple different IP addresses associated with it. In this project, it is assumed that every IP address is a single device, as this is usually the case.
 
 
-\subsection{Research approach}
-As the main goals for the project is to find methods suitable for identifying devices within the constraints, and to use these methods to identify how many devices can be found. The first step will be to get familiar with the Open-source Intelligence tools useful for the purpose of identifying and analyzing devices connected to the internet. Then research will be made to see what methods already exist. These methods will be tested with the constraints. Then the student will consult the supervisors from both DNV-GL and NTNU for thoughts on the methods found, and for ideas for new methods. Changes will be made to the old methods according to the feedback. Then both the old and the new methods will be tested again. After this, the student will again look for new methods to try, completing the loop as illustrated in \cref{fig:workflow} This process will be repeated until the interested parties are satisfied.
-Articles for the research was mainly found by using the search engines Engineering Village\cite{engineering_village} and Google Scholar\cite{google_scholar}. During the research, however, it was found that some OSINT techniques was easier to find in online blogs. These were found by utilizing the DuckDuckGo internet search engine\cite{ddg}. 
+\subsection{Research approach} \label{sec:research_approach}
+The work of this project will mostly be intelligence: To suggest methods for detecting devices as per the project goal. To achieve this in an efficient way, an apporach is followed.
+The first step will be to get familiar with the Open-source Intelligence tools useful for the purpose of identifying and analyzing devices connected to the internet. 
+
+Research will be made to see what methods already exist. These methods will be tested with the constraints. Then the supervisors from both DNV-GL and NTNU will be consulted for thoughts on the methods found. Changes will be made to the methods according to the feedback. Then both the iterations of the methods will be tested again. Based on the new results, individual research is again performed, thus completing the loop illustrated in \cref{fig:workflow} This process will be repeated until the interested parties are satisfied. 
+The main focus of this research approach is to identify and suggest existing methods.
+
+The research mentioned in this approach was mostly done by reading articles on the subject. These articles was found by using the search engines Engineering Village\cite{engineering_village} and Google Scholar\cite{google_scholar}. During the research, however, it was found that some OSINT techniques was easier to find in online blogs. These were found by utilizing the DuckDuckGo internet search engine\cite{ddg}. 
 
 
 \tikzset{every picture/.style={line width=0.75pt}}
@@ -95,21 +111,7 @@ Articles for the research was mainly found by using the search engines Engineeri
 
 
 
-\subsection{Definition of important terms} \label{sec:definitions}
-\subsubsection{Cyber-Physical Systems(CPS)}\label{sec:cps}
-This project will rely on the definition of CPS from \textit{Conceptualizing the key features of cyber‐physical systems in a multi‐layered representation for safety and security analysis}.~\cite{guzman_wied_kozine_lundteigen_2019}
-This article defines Cyber-Physical Systems(CPS) as "engineered systems that integrate information technologies, real‐time control subsystems, physical components, and human operators to influence physical processes by means of cooperative and (semi)automated control functions." CPS also has the three key features:
-\begin{enumerate}
-    \item Real-time feedback control of physical processes through sensors and actuators  
-    \item Cooperative control among networked subsystems,and
-    \item A threshold of automation level where computers close the feed-back control loops in (semi)automated tasks, possibly allowing human control in certain cases. 
-\end{enumerate}
-This defines CPS as a broad term, and examples can be everything from the control systems at offshore platforms to an electric car. 
-
-\subsubsection{Open-Source Intelligence(OSINT)}\label{sec:osint}
-Open-Source Intelligence(OSINT) is defined by the American Office of The Director of National Intelligence in their Intelligence Community Directive as: "[Intelligence] produced from publicly available information that is collected, exploited, and disseminated in a timely manner to an appropriate audience for the purpose of addressing a specific intelligence requirement."\cite{directive_301} This directive also defines Open Source Information as "Publicly available information that anyone can lawfully obtain by request, purchase, or observation.". Open-Source Intelligence (OSINT) is therefore gathering of intelligence that is lawfully available to the public. 
-
 \subsection{Structure of report}
-This report has five main parts. First, in this section, \cref{sec:intro}, the project is introduced. In \cref{sec:theory}, basic principles used in this project is explained. Important principles from the working of the internet is explained, along with the basics of the Shodan search engine. In \cref{sec:method} different approaches for selective identification of IP devices are outlined. In \cref{sec:results} the results from using the aforementioned approaches are listed, along discussion of these results. Lastly, in \cref{sec:conclusion} a conclusion is drawn from the results, along with suggestions for further work on the topic.
+This report has five main parts. First, in this section, \cref{sec:intro}, the project is introduced. In \cref{sec:theory}, basic principles used in this project is explained. Important principles from the working of the internet is explained, along with the basics of the Shodan search engine. In \cref{sec:method} different approaches for selective identification of IP devices are outlined. In \cref{sec:results} the results from using the aforementioned approaches are listed, along discussion of these results. In \cref{sec:conclusion} a conclusion is drawn from the results.  Lastly, suggestions for further work on the topic is suggested
 
 \newpage

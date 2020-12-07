@@ -13,21 +13,14 @@ Sigurd Hellesvik
 \addcontentsline{toc}{section}{Acknowledgments}
 This project is a collaboration between the main supervisor Mary Ann Lundteigen and PhD candidate Bálint Zoltán Téglásy, both representing NTNU; and the Global Service Line leader, Cybersecurity, at DNV-GL Trondheim,  Mate J Csorba. The student carrying out the project is Sigurd Hellesvik.
 
-\subsection*{DNV-GL}\label{sec:dnvgl}
-\addcontentsline{toc}{subsection}{DNG-GL}
-DNV-GL are a independent expert in risk management and quality assurance. The abbreviation is for "Det Norske Veritas" and "Germanischer Lloyd". A big portion of their focus is on the maritime and offshore business. The DNV-GL has a Cyber Security team that helps customers assess and manage risks related to cyber security.~\cite{DNVGL_cybersec}  The International Maritime Organization (IMO) "encourages administrations to ensure that cyber risks are appropriately addressed in existing safety management systems (as defined in the ISM Code) no later than [...] 1 January 2021".~\cite{IMO_2021} Because of this, many maritime corporations will have to pay more attention to cyber security; making maritime cyber security specialists like DNV-GL Cyber Security team all the more relevant for the business. 
-
-\subsection*{NTNU}\label{sec:ntnu}
-\addcontentsline{toc}{subsection}{NTNU}
-The Norwegian University of Technology and Science, with the Norwegian abbreviation NTNU, is the largest university in Norway, and has 75 percent of the technology master candidates in the country. This projects mainly takes place on the Trondheim Campus.
-
 \section*{Summary}
 \addcontentsline{toc}{section}{Summary}
-IEC62443 define methods for improving the cybersecurity of Cyber-Physical Systems(CPS). However, not everyone who implement these systems will follow these standards, while others follow them, but make mistakes. Therefore, a subset of devices that are connected to the internet will be vulnerable. If these devices can be found using Open Source Intelligence (OSINT) tools, attackers may be able to get access to the devices. 
 
-As more organizations within the offshore and maritime industries digitalize parts of their CPS to improve performance, they also open up for possible vulnerabilities. This project describe and test approaches to identify devices that are both connected to the internet and are a part of a CPS within these industries. The main OSINT tool used for this is the search engine Shodan. The traceroute command line tool is also utilized.
+As organizations within the offshore and maritime industries digitalize parts of their Cyber Physical Systems(CPS) to improve performance, they also open up for possible vulnerabilities. This project describe and test methods for identifying devices that are both connected to the internet and are a part of a CPS within these industries. 
+Industry standards define methods for improving the cybersecurity of CPS. However, not everyone who implement these systems will follow these standards, while others follow them, but make mistakes. Therefore, a subset of devices that are connected to the internet will be vulnerable. If these devices can be found using Open Source Intelligence (OSINT) tools, attackers may be able to get access to the devices. 
+The main OSINT tool used for this is the search engine Shodan. The traceroute command line tool is also utilized.
 
-Four main methods are proposed: Identify devices by Shodan banner information(1), by ISP(2), reverse geolocation(3) and latency(4).
+To identify devices, four methods are proposed: Identify devices by Shodan banner information(1), by ISP(2), reverse geolocation(3) and latency(4).
 The reverse geolocation did not work for the maritime and offshore industry. 
 ISP queries for organizations within the different industries showed that  maritime industry has more online devices than the offshore industry. 
 Using banner identification turned out to be the most accurate method, as it can identify devices decisively. It returns few results however.
