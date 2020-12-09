@@ -9,7 +9,7 @@ Several methods to filter devices based on industry is suggested in \cref{sec:id
 \subsubsection{Banner similarities} \label{sec:banner_method}
 When connecting a device to the internet, it needs to be configured. The installer needs competence to do this properly, and to spend time to perform the installation. To make such devices more accessible and efficient, finished solutions are most often used. Due to this, the same devices mostly have the same default configuration, and therefore the same banners. This can be used to identify devices within the chosen constraints by using the following method.
 \begin{enumerate}
-    \item Choose a device type that fulfill the constraints and may be connected to the internet.
+    \item Choose a device type that fulfills the constraints and may be connected to the internet.
     \item Find the IP address of one instance of such a device, and find its Shodan entry.
     \item Get its banner.
     \item Use unique information from the banner to find all devices with similar banners.
@@ -26,17 +26,17 @@ Regional Internet Registries (RIR) sell IP addresses to organizations, for them 
 \begin{figure} [H]
     \centering
     \includegraphics[scale=4]{Figurer/map_of_the_internet.jpg}
-    \caption{A map of the IPv4 space, from the XKCD web comic. \cite{xkcd} }
+    \caption{A map of the IPv4 space, from the XKCD webcomic. \cite{xkcd} }
     \label{fig:ipv4_map}
 \end{figure}
 
-While it is straight forward to find the name of an organization or ISP, a tool is needed to find CIDR ranges. One or more CIDR range that is owned by an organization and has a single defined routing policy is called an Autonomous System(AS). A typical example of an organization that owns an AS, is an Internet Service Provider(ISP). \cite{AS_def} 
+While it is straightforward to find the name of an organization or ISP, a tool is needed to find CIDR ranges. One or more CIDR range that is owned by an organization and has a single defined routing policy is called an Autonomous System(AS). A typical example of an organization that owns an AS, is an Internet Service Provider(ISP). \cite{AS_def} 
 The AS are registered with unique identification numbers. Online tools, like \href{https://hackertarget.com/as-ip-lookup/}{\textbf{Hackertarget AS-IP lookup}} \cite{asip_lookup}, makes it possible to find the parent AS of an IP address. Then the rest of the IP addresses belonging to the same AS can be found.
 
 
 \subsubsection{Reverse IP geolocation} \label{sec:geo_method}
 When Regional Internet Registries (RIR) give IP addresses to organizations, they also register contact information on the IP addresses. A part of this information is a location, specifying a country and city. Some data providers claim that the country accuracy is between 95\% and 99\%, while the city accuracy is between 50\% and 75\%.\cite{geolocation_acc}With accuracy that poor, it is not possible to decide if an IP address is within the constraints by using IP geolocation. The information returned by the one of the RIRs can be seen in \cref{fig:RIPE_NCC}.
-Shodan have a filter for the location. This filter can also filter by latitude and longitude. However, I have not been able to find any information on how Shodan gather this information. %\todo{Er det innafor å seie "I have" her?} 
+Shodan has a filter for the location. This filter can also filter by latitude and longitude. However, Shodan does not disclose how they gather this information. 
 Because of these uncertainties, IP geolocation can not be conclusive for finding devices within the constraints. However, by reversing the technique, it would be possible to narrow down the selection of IP addresses by first defining an area. Shodan can use the filter "geo:latitude,longitude,radius" to filter on addresses based on location.  
 
 \begin{figure} [H]
@@ -47,10 +47,10 @@ Because of these uncertainties, IP geolocation can not be conclusive for finding
 \end{figure}
 
 \subsubsection{Latency and traceroute} \label{sec:latency_method}
-The simplest form of reaching another device on the internet is called a "ping". This sends a echo request to an IP address, to make it send a response back. It is mostly used to check if a device is reachable. To prevent a bug where packets travel in an infinite loop instead of reaching the recipient, packets have a Time To Live (TTL) counter. This counter increments every time a packet travels trough a switch or router. When this counter is reached, the packet is stopped, and a message is returned to the sender, informing it of the loss.
-The "traceroute" command takes advantage of the fact that the Time To Live counter can be set by the sender. It will start the TTL counter at 1 and sending a message towards a predefined target IP address. This message will then travel 1 step towards its target before it is returned. Then it increments this counter and repeats the send. This way, all routers the packet travel trough on its way will be indexed. In addition, traceroute will time how long the packet uses before it is returned, called "Round Trip Time"(RTT).
+The simplest form of reaching another device on the internet is called a "ping". This sends a echo request to an IP address, to make it send a response back. It is mostly used to check if a device is reachable. To prevent a bug where packets travel in an infinite loop instead of reaching the recipient, packets have a Time To Live (TTL) counter. This counter increments every time a packet travels through a switch or router. When this counter is reached, the packet is stopped, and a message is returned to the sender, informing it of the loss.
+The "traceroute" command takes advantage of the fact that the Time To Live counter can be set by the sender. It will start the TTL counter at 1 and sending a message towards a predefined target IP address. This message will then travel 1 step towards its target before it is returned. Then it increments this counter and repeats the send. This way, all routers the packet travel through on its way will be indexed. In addition, traceroute will time how long the packet uses before it is returned, called "Round Trip Time"(RTT).
 The Round Trip Time can give an idea of how the signal travels. Faster RTT can be because of shorter distance or better infrastructure. On the other hand, slow RTT can indicate farther distance or worse infrastructure.
-The traceroute is visualized in \cref{fig:latency}. Here the signal will travel fast from Source to both Router 1 and Router 2. There will then be a jump in latency when the signal crosses the Atlantic ocean on its way to router 3. The longest delay will be where the signal travels to the Destination from Router 3 trough a satellite.
+The traceroute is visualized in \cref{fig:latency}. Here the signal will travel fast from Source to both Router 1 and Router 2. There will then be a jump in latency when the signal crosses the Atlantic ocean on its way to router 3. The longest delay will be where the signal travels to the Destination from Router 3 through a satellite.
 
 \begin{figure} [H]
     \centering
@@ -64,7 +64,7 @@ As mentioned in \cref{sec:cps}, Cyber-Physical Systems(CPS) is a system containi
 These methods can be used standalone, but in this project they are intended for use on a subset of devices that are filtered from the methods suggested in \cref{sec:identify_industry}.
 
 \subsubsection{Industrial Control Systems}
-Industrial Control Systems(ICS) are mostly easy to identify. A lot of previous research already exist on Shodan and ICS. For example: \textit{Exploring Shodan From the Perspective of Industrial Control Systems}\cite{bodenheim_butts_dunlap_mullins_2014} and \textit{Evaluation of the ability of the Shodan search engine to identify Internet-facing industrial control devices} \cite{ICS_shodan_article}.  In addition, Shodan has a list of popular ICS systems, and search terms used to find the systems.\cite{shodan_ics} The different ICS use standard ports for communication trough the internet, and Shodan can use the "port" filter to find them. ICS also often has similar banners, and the same method as in \cref{sec:banner_method} would work on ICS.
+Industrial Control Systems(ICS) are mostly easy to identify. A lot of previous research already exist on Shodan and ICS. For example: \textit{Exploring Shodan From the Perspective of Industrial Control Systems}\cite{bodenheim_butts_dunlap_mullins_2014} and \textit{Evaluation of the ability of the Shodan search engine to identify Internet-facing industrial control devices} \cite{ICS_shodan_article}.  In addition, Shodan has a list of popular ICS systems, and search terms used to find the systems.\cite{shodan_ics} The different ICS use standard ports for communication through the internet, and Shodan can use the "port" filter to find them. ICS also often has similar banners, and the same method as in \cref{sec:banner_method} would work on ICS.
 
 \subsubsection{Navigation systems}
 In the maritime industry, Electronic Chart Display and Information System(ECDIS) is often used for navigating ships. While a lot of them have downloaded maps, many also use online maps, and therefore has a connection to the internet. For identifying these systems, the methods proposed in \cref{sec:banner_method} and \cref{sec:isp_method} would be the most effective.

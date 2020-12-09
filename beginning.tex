@@ -16,14 +16,14 @@ This project is a collaboration between the main supervisor Mary Ann Lundteigen 
 \section*{Summary}
 \addcontentsline{toc}{section}{Summary}
 
-As organizations within the offshore and maritime industries digitalize parts of their Cyber Physical Systems(CPS) to improve performance, they also open up for possible vulnerabilities. This project describe and test methods for identifying devices that are both connected to the internet and are a part of a CPS within these industries. 
+As organizations within the offshore and maritime industries digitalize parts of their Cyber Physical Systems(CPS) to improve performance, they also open up for possible vulnerabilities. This project describe and test methods for identifying devices that are both connected to the internet and are part of a CPS within these industries. 
 Industry standards define methods for improving the cybersecurity of CPS. However, not everyone who implement these systems will follow these standards, while others follow them, but make mistakes. Therefore, a subset of devices that are connected to the internet will be vulnerable. If these devices can be found using Open Source Intelligence (OSINT) tools, attackers may be able to get access to the devices. 
-The main OSINT tool used for this is the search engine Shodan. The traceroute command line tool is also utilized.
+The main OSINT tool used in this project is the search engine Shodan. The traceroute tool is also utilized.
 
 To identify devices, four methods are proposed: Identify devices by Shodan banner information(1), by ISP(2), reverse geolocation(3) and latency(4).
 The reverse geolocation did not work for the maritime and offshore industry. 
-ISP queries for organizations within the different industries showed that  maritime industry has more online devices than the offshore industry. 
-Using banner identification turned out to be the most accurate method, as it can identify devices decisively. It returns few results however.
+ISP queries for organizations within the different industries showed that the maritime industry has more online devices than the offshore industry. 
+Using banner identification turned out to be the most accurate method, as it can identify devices decisively. It returned few results however.
 Comparing latency jumps using the traceroute command turned out to be quite helpful for giving information where relevant IP addresses are located.
 
 All in all, few devices, as parts of CPSs, were online within the offshore and maritime industries. This can either be because the industries has few connected devices, good cybersecurity, or because the research of this project was not thorough enough.

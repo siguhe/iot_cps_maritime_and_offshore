@@ -1,17 +1,17 @@
 \section{Introduction} \label{sec:intro}
 
 \subsection{Background} \label{sec:background}
-With a higher than ever number for devices connected to the internet than ever\cite{iot_stats}, more devices are vulnerable than ever. Many do not want an wireless lock on their house, since there is a chance it can be hacked by malicious parties. The lock must of course be secure and resistant to attacks, but it is hard to make something a hundred percent secure. The same challenge is even more important for industrial systems, where loss of money, damage to the environment or even loss of life can be consequences of system failure. There are already many examples of cyber-attacks on industrial systems, for example STRUXNET\cite{struxnet}, a computer worm that infected an Iranian nuclear facility. 
-As with other industries, the marine and offshore industries are connecting more parts of their Cyber-Physical Systems(CPS) to the internet to improve their efficiency. While a lot of the Cyber-Physical Systems connected to the internet are well maintained and secure, many other are vulnerable. This is most often because the CPSs are not set up properly or run outdated software. Other than this, it is a "fact" of statistics that if a quantity Cyber-Physical Systems are connected to the internet, a portion of these will be insecure. 
+With a higher than ever number for devices connected to the internet than ever\cite{iot_stats}, more devices are vulnerable than ever. Many do not want a wireless lock on their house, since there is a chance it can be hacked by malicious parties. The lock must of course be secure and resistant to attacks, but it is hard to create something that is a hundred percent secure. The same challenge is even more important for industrial systems, where loss of money, damage to the environment or even loss of life can be the consequences of system failure. There are already many examples of cyber-attacks on industrial systems, for example STRUXNET\cite{struxnet}, a computer worm that infected an Iranian nuclear facility. 
+As with other industries, the marine and offshore industries are connecting more parts of their Cyber-Physical Systems(CPS) to the internet to improve their efficiency. While a lot of the Cyber-Physical Systems connected to the internet are well maintained and secure, many others are vulnerable. This is most often because the CPSs are not set up properly or run outdated software. Other than this, it is a "fact" of statistics that if a quantity Cyber-Physical Systems are connected to the internet, a portion of these will be insecure. 
 
 The IT security standard for industrial communication networks, IEC62443 describes preliminary recommendations and guidance for the use of cybersecurity technology and countermeasures. To stay as secure as possible, the industries should apply these measures.\cite{IEC62443} Among other things, it specifies that firewalls should be added to systems that have the ability to "[Filter] IP-addresses on the outside allowed on the inside and vice versa". And filter "[ports and] applications allowed for communication". In other words, only devices that have a good reason for being connected to the Internet should be connected. 
 
 DNV-GL is an independent expert in risk management and quality assurance, and has a big portion of their focus is on the maritime and offshore business. The DNV-GL has a Cyber Security team that helps customers assess and manage risks related to cyber security,~\cite{DNVGL_cybersec} and might have a interest in the findings of this project.
 
-The research in cybersecurity at NTNU is mostly done at the Department of Information Security and Communication Technology and  the Department of Computer Science. As cybersecurity is important, some focus should be put on the topic in other departments as well, where it is relevant. This is the case for the Department of Engineering Cybernetics, which have a lot of focus on computer systems, both for the industry and embedded systems. Project theses like this one can be a way for the departements to get more insight in the importance of cybersecurity.
+The research in cybersecurity at NTNU is mostly done at the Department of Information Security and Communication Technology and  the Department of Computer Science. As cybersecurity is important, some focus should be put on the topic at other departments as well, where it is relevant. This is the case for the Department of Engineering Cybernetics, which have a lot of focus on computer systems, both for the industry and embedded systems. Project theses like this one can be a way for the departments to get more insight in the importance of cybersecurity.
 
 \subsection{Objectives}
-The goal of this project is to map of Cyber-Physical Systems(CPS) in the maritime and offshore industry that is reachable trough the internet, and by doing so get an overview of the exposure of these cyber-physical systems.
+The goal of this project is to map of Cyber-Physical Systems(CPS) in the maritime and offshore industry that is reachable through the internet, and by doing so get an overview of the exposure of these cyber-physical systems.
 
 This goal was split into tasks, which define that this project should
 \begin{enumerate}
@@ -23,27 +23,32 @@ This goal was split into tasks, which define that this project should
     \item Identify potential topics that may require further research, based on the findings and in collaboration with the supervisors.
 \end{enumerate}
 
-Since all publicly available devices can be found quite easily, the difficult part will be to recognize devices within the constraints of CPS in the maritime and offshore industries.
-Open-source intelligence(OSINT) is utilized to map these CPS. The OSINT search engine \href{https://shodan.io}{\color{blue}{Shodan}}\cite{shodan} is a popular search engine for enumerating Internet-connected systems, and will be used as the main reconnaissance tool of this project. 
+
+Open-source intelligence(OSINT) is utilized to map the CPS. The OSINT search engine \href{https://shodan.io}{\color{blue}{Shodan}}\cite{shodan} is a popular search engine for enumerating Internet-connected systems, and will be used as the main reconnaissance tool of this project. 
+Since all publicly available devices is already mostly scanned and indexed by Shodan, the difficult part will be to recognize devices within the constraints of CPS in the maritime and offshore industries.
 
 
 \subsection{Limitations and assumptions} \label{sec:limits}
 In \cref{sec:ipv6} it is assumed that industries in the offshore and maritime industries will not use a significant amount of IPv6. This is based on the findings from when this report is written, and the situation will hopefully change in the coming years. However, due to this, IPv6 was not investigated as thoroughly as IPv4.
+
 Shodan is used as the main OSINT tool in this report. Any shortcomings of this tool will also affect the work of this project.
-There are other tools available as well. Some of them has the same functionality as Shodan, like \href{https://censys.io/}{\color{blue}{Censys}}\cite{censys} and \href{www.zoomeye.org}{\color{blue}{ZoomEye}}\cite{zoomeye}. Other tools, like the Traceroute tool used in \cref{sec:latency_method}, covers functionality that Shodan do not. There is many available OSINT tools available, and while Shodan was assessed to be the most fitting to this project, parts of it might be easier or more efficient to do with other tools. Tools not mentioned in the report were either not found or evaluated as not relevant.
-Honeypot technology is to make a computer pretend to be another device. This is often done to do statistics on attempts to access the impersonated systems are done. This technology is quite popular for use on CPS, and during the research of this project, multiple other articles were found that set up honeypots as part of their research.\cite{bodenheim_butts_dunlap_mullins_2014}\cite{ICS_shodan_article} There is therefore a chance that some of the devices found by Shodan is in reality fake. Shodan has a function for identifying honeypots, but it is not foolproof.
+
+There are other tools available as well. Some of them has the same functionality as Shodan, like \href{https://censys.io/}{\color{blue}{Censys}}\cite{censys} and \href{www.zoomeye.org}{\color{blue}{ZoomEye}}\cite{zoomeye}. Other tools, like the Traceroute tool used in \cref{sec:latency_method}, covers functionality that Shodan does not. There is many available OSINT tools available, and while Shodan was assessed to be the most fitting to this project, parts of it might be easier or more efficient to do with other tools. Tools not mentioned in the report were either not found or evaluated as not relevant.
+
+Honeypot technology is to make a computer pretend to be another device. This is often done to do statistics on attempts to access the impersonated systems are done. This technology is quite popular for use on CPS, and during the research of this project, multiple other articles were found that set up honeypots as part of their research.\cite{bodenheim_butts_dunlap_mullins_2014}\cite{ICS_shodan_article} There is therefore a chance that some of the devices found by Shodan are in reality fake. Shodan has a function for identifying honeypots, but it is not foolproof.
+
 A device connected to the internet might have multiple different IP addresses associated with it. In this project, it is assumed that every IP address is a single device, as this is usually the case.
 
 
 \subsection{Research approach} \label{sec:research_approach}
-The work of this project will mostly be intelligence: To suggest methods for detecting devices as per the project goal. In this report, all mentions of "method" will refer to these mtehods.
-To achieve this in an efficient way, an apporach is followed.
+The work of this project will mostly be intelligence: To suggest methods for detecting devices as per the project goal. In this report, all mentions of "method" will refer to these methods.
+To achieve the project goal in an efficient way, an approach is followed.
 The first step will be to get familiar with the Open-source Intelligence tools useful for the purpose of identifying and analyzing devices connected to the internet. 
 
 Research will be made to see what methods already exist. These methods will be tested with the constraints. Then the supervisors from both DNV-GL and NTNU will be consulted for thoughts on the methods found. Changes will be made to the methods according to the feedback. Then both the iterations of the methods will be tested again. Based on the new results, individual research is again performed, thus completing the loop illustrated in \cref{fig:workflow} This process will be repeated until the interested parties are satisfied. 
 The main focus of this research approach is to identify and suggest existing methods.
 
-The research mentioned in this approach was mostly done by reading articles on the subject. These articles was found by using the search engines Engineering Village\cite{engineering_village} and Google Scholar\cite{google_scholar}. During the research, however, it was found that some OSINT techniques was easier to find in online blogs. These were found by utilizing the DuckDuckGo internet search engine\cite{ddg}. 
+The research mentioned in this approach was mostly done by reading articles on the subject. These articles were found by using the search engines Engineering Village\cite{engineering_village} and Google Scholar\cite{google_scholar}. During the research, however, it was found that some OSINT techniques was easier to find in online blogs. These were found by utilizing the DuckDuckGo internet search engine\cite{ddg}. 
 
 
 \tikzset{every picture/.style={line width=0.75pt}}
@@ -84,7 +89,7 @@ The research mentioned in this approach was mostly done by reading articles on t
         % Text Node
         \draw (117.75,192) node [anchor=north west][inner sep=0.75pt]   [align=left] {\begin{minipage}[lt]{59.42064400000001pt}\setlength\topsep{0pt}
             \begin{center}
-                Advise from \\supervisors
+                Advice from \\supervisors
             \end{center}
 
         \end{minipage}};
@@ -113,6 +118,6 @@ The research mentioned in this approach was mostly done by reading articles on t
 
 
 \subsection{Structure of report}
-This report has five main parts. First, in this section, \cref{sec:intro}, the project is introduced. In \cref{sec:theory}, basic principles used in this project is explained. Important principles from the working of the internet is explained, along with the basics of the Shodan search engine. In \cref{sec:method} different methods for selective identification of IP devices are outlined. In \cref{sec:results} the results from using the aforementioned methods are listed, along discussion of these results. In \cref{sec:conclusion} a conclusion is drawn from the results.  Lastly, suggestions for further work on the topic is suggested
+This report has five main parts. First, in this section, \cref{sec:intro}, the project is introduced. In \cref{sec:theory}, basic principles used in this project is explained. Important principles from the working of the internet is explained, along with the basics of the Shodan search engine. In \cref{sec:method} different methods for selective identification of IP devices are outlined. In \cref{sec:results} the results from using the aforementioned methods are listed, along with discussion of these results. In \cref{sec:conclusion} a conclusion is drawn from the results.  Lastly, suggestions for further work on the topic is suggested
 
 \newpage
