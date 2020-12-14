@@ -2,7 +2,7 @@
 \addcontentsline{toc}{section}{Preface}
 This project and report is for the course TTK4550 - Engineering Cybernetics, Specialization Project, for the Department of Engineering Cybernetics at the The Norwegian University of Technology and Science(NTNU). The project was defined as a cooperation between NTNU and DNV-GL. The project was not written for DNV-GL, but they assisted with helpful insights and advice during the project. The workload of the project is equal to half a semester of studies, and the work was performed in Trondheim, Norway.
 
-I hope that the findings of this project can be helpful to both DNV-GL, the Department of Engineering Cybernetics and others who find it. 
+I hope that the findings of this project can be helpful to DNV-GL, the Department of Engineering Cybernetics and others who may read the report. 
 \\
 Trondheim, 2020-11-21
 \\
@@ -16,16 +16,17 @@ This project is a collaboration between the main supervisor Mary Ann Lundteigen 
 \section*{Summary}
 \addcontentsline{toc}{section}{Summary}
 
-As organizations within the offshore and maritime industries digitalize parts of their Cyber Physical Systems(CPS) to improve performance, they also open up for possible vulnerabilities. This project describe and test methods for identifying devices that are both connected to the internet and are part of a CPS within these industries. 
-Industry standards define methods for improving the cybersecurity of CPS. However, not everyone who implement these systems will follow these standards, while others follow them, but make mistakes. Therefore, a subset of devices that are connected to the internet will be vulnerable. If these devices can be found using Open Source Intelligence (OSINT) tools, attackers may be able to get access to the devices. 
+As organizations within the offshore and maritime industries digitalize parts of their Cyber Physical Systems(CPS) to improve performance, they also open up for possible vulnerabilities. This project describes and tests methods for identifying devices that are connected to the internet and are also part of a CPS within these industries. 
+Industry standards define methods for improving the cybersecurity of CPSs. However, not everyone who implements these systems will follow these standards. Others follow them, but make mistakes. Therefore, a subset of devices connected to the internet will be vulnerable. If these devices can be found by the use of Open Source Intelligence (OSINT) tools, attackers may be able to get access to the devices. 
 The main OSINT tool used in this project is the search engine Shodan. The traceroute tool is also utilized.
 
-To identify devices, four methods are proposed: Identify devices by Shodan banner information(1), by ISP(2), reverse geolocation(3) and latency(4).
-The reverse geolocation did not work for the maritime and offshore industry. 
-ISP queries for organizations within the different industries showed that the maritime industry has more online devices than the offshore industry. 
-Using banner identification turned out to be the most accurate method, as it can identify devices decisively. It returned few results however.
-Comparing latency jumps using the traceroute command turned out to be quite helpful for giving information where relevant IP addresses are located.
+To identify devices, four methods are proposed: Identifying devices by (1)Shodan banner information, (2) by ISP, (3) reverse geolocation and (4) by latency.
+The reverse geolocation(3) did not work for the maritime and offshore industries. 
+ISP queries(2) for organizations within the different industries showed that the maritime industry has more online devices than the offshore industry. 
+Using banner identification(1) turned out to be the most accurate method, as it can identify devices decisively. It returned few results however.
+Comparing latency jumps(4) using the traceroute command turned out to be quite helpful in yielding information where relevant IP addresses are located.
 
-All in all, few devices, as parts of CPSs, were online within the offshore and maritime industries. This can either be because the industries has few connected devices, good cybersecurity, or because the research of this project was not thorough enough.
+All in all, only few devices, as parts of CPSs, were online within the offshore and maritime industries. This can either be because the industries have few connected devices, because they have good cybersecurity, or because the research of this project was not sufficiently comprehensive enough.
+%,or because the limitations of the present project did not allow a sufficiently comprehensive research.
 
 \newpage

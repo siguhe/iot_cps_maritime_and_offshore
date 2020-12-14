@@ -1,36 +1,36 @@
 \section{Theory} \label{sec:theory}
-To make a foundation to understand the methods found when using the research approach defined in \cref{sec:research_approach}, this chapter will describe some important terms, concepts and theory.
+This chapter will describe some important terms, concepts and theories as a basis for understanding the methods found when using the research approach defined in \cref{sec:research_approach}, 
 
 \subsection{Definition of important terms} \label{sec:definitions}
-\subsubsection{Cyber-Physical Systems(CPS)}\label{sec:cps}
-This project will rely on the definition of CPS from \textit{Conceptualizing the key features of cyber‐physical systems in a multi‐layered representation for safety and security analysis}.~\cite{guzman_wied_kozine_lundteigen_2019}
-This article defines Cyber-Physical Systems(CPS) as "engineered systems that integrate information technologies, real‐time control subsystems, physical components, and human operators to influence physical processes by means of cooperative and (semi)automated control functions." CPS also has the three key features:
+\subsubsection{Cyber-Physical Systems}\label{sec:cps}
+This project will rely on the definition of Cyber-Physical Systems(CPSs) in \textit{Conceptualizing the key features of cyber‐physical systems in a multi‐layered representation for safety and security analysis}.~\cite{guzman_wied_kozine_lundteigen_2019}
+This article defines CPS as an "engineered systems that integrate information technologies, real‐time control subsystems, physical components, and human operators to influence physical processes by means of cooperative and (semi)automated control functions." CPS has the three key features:
 \begin{enumerate}
     \item Real-time feedback control of physical processes through sensors and actuators  
     \item Cooperative control among networked subsystems,and
     \item A threshold of automation level where computers close the feed-back control loops in (semi)automated tasks, possibly allowing human control in certain cases. 
 \end{enumerate}
-This defines CPS as a broad term, and examples can be everything from the control systems at offshore platforms to an electric car. 
+This defines CPS as a broad term, and examples can be anything from the control systems at offshore platforms to those of an electric car. 
 
 \subsubsection{Open-Source Intelligence(OSINT)}\label{sec:osint}
 Open-Source Intelligence(OSINT) is defined by the American Office of The Director of National Intelligence in their Intelligence Community Directive as: "[Intelligence] produced from publicly available information that is collected, exploited, and disseminated in a timely manner to an appropriate audience for the purpose of addressing a specific intelligence requirement."\cite{directive_301} This directive also defines Open Source Information as "Publicly available information that anyone can lawfully obtain by request, purchase, or observation.". Open-Source Intelligence (OSINT) is therefore gathering of intelligence that is lawfully available to the public. 
 
 \subsection{The Internet Protocol}
-The Internet Protocol(IP) is used to route data trough the internet. The two most used versions are IPv4 and IPv6.
+The Internet Protocol(IP) is used to route data through the internet. The two most common versions are IPv4 and IPv6.
 
 \subsubsection{IPv4}
-To navigate the internet, the IP protocol is used. This is mainly split into the popular IPv4 and the new IPv6. IPv4 addresses are 32 bit, meaning they can range from 0.0.0.0 to 255.255.255.255. 
+To navigate on the internet, the IP protocol is used. This is mainly split into the popular IPv4 and the new IPv6. IPv4 addresses are 32 bit, meaning they can range from 0.0.0.0 to 255.255.255.255. 
 
 \subsubsection{IPv6} \label{sec:ipv6}
-IPv6 is an extended version of IPv4, and has $2^{128}$ unique addresses. IPv6 was 1995, and the plan was to change from using IPv4 to IPv6. However, the global conversion from IPv4 to IPv6 is slow, .While Shodan does support IPv6, most corporations in the maritime and offshore industries are big enough to own IPv4 addresses, and they therefore have little reason to change to IPv6.
+IPv6 is an extended version of IPv4, and has $2^{128}$ unique addresses. IPv6 was introduced in 1995, and the plan was to change from using IPv4 to IPv6. However, the global conversion from IPv4 to IPv6 is slow .While Shodan supports IPv6, most corporations in the maritime and offshore industries are big enough to own IPv4 addresses, and they therefore have little reason to use IPv6.
 
 \subsection{IP ranges}
- The IPv4 addresses are sold to organizations, for them to distribute further. For example, an Internet Service Provider (ISP) like Telenor will give IPv4 addresses to the customers while they use their subscribed internet connections. This distribution of IPv4 addresses to organizations is illustrated in \cref{fig:ipv4_map}.
+The IPv4 addresses are sold to organizations, who distribute them further. For example, an Internet Service Provider (ISP) like Telenor will hand out temporary IPv4 addresses to their customers, to allow them to connect to the internet. This distribution of IPv4 addresses to organizations is illustrated in \cref{fig:ipv4_map}.
 
 \subsubsection{IPv4 exhaustion and NAT}
-The Internet Assigned Numbers Authority (IANA) is responsible for distributing IPv4 addresses. 11 January, 2011, IANA allocated its last block.\cite{exhasuted_IPV4} Since then, the regional bodies responsible for allocating IPv4 addresses, Regional Internet Registries (RIR), have also exhausted their IPv4 addresses, the last one in 2019.\cite{exhausted_RIPENNC} Due to this problem, multiple technologies are used to get the most out of the IPv4 address space. Arguably, the most popular of these technologies are Network Address Translation (NAT). IPv6 was also designed to solve the IPv4 exhaustion challenge.
+The Internet Assigned Numbers Authority (IANA) is responsible for distributing IPv4 addresses. On the 11 January, 2011, IANA allocated its last block.\cite{exhasuted_IPV4} Since then, the regional bodies responsible for allocating IPv4 addresses, Regional Internet Registries (RIR), have also exhausted their IPv4 addresses; the last one was allocated in 2019.\cite{exhausted_RIPENNC} Due to this problem, multiple technologies are used to get the most out of the IPv4 address space. Arguably, the most popular of these technologies is Network Address Translation (NAT). IPv6 was also designed to solve the IPv4 exhaustion challenge.
 
-NAT lets you connect multiple devices to the same IPv4. This is done by using a routing device with a shared IPv4 address to receive packages for multiple different devices, and then redirect the packages to the correct receiver. This makes it so that the devices behind the NAT can reach the internet, while communication from the internet can not reach the devices unless the devices start the communication. This connection is illustrated in \cref{fig:NAT} 
+NAT makes it possible to connect multiple devices to the same IPv4. This is done by using a routing device with a shared IPv4 address to receive packages for multiple different devices, and then redirect the packages to the correct receiver. In this way the devices behind the NAT can reach the internet, while communication from the internet can not reach the devices unless the devices start the communication. This connection is illustrated in \cref{fig:NAT} 
 
 
 \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
@@ -85,7 +85,7 @@ NAT\\Router
 
 
 \subsubsection{CIDR}
- Classless Inter-Domain Routing(CIDR) is the modern way to split the IPv4 address space into blocks, so that they can be distributed. A CIDR block can look like this: "93.192.0.0/10". This block has two parts, the prefix "93.192.0.0" and the suffix "/10". The prefix indicates the size of the CIDR block. The prefix indicates where in the IPv4 space the CIDR block is located. To understand this, it is useful to look at an IP address in binary instead of decimal. For example, the IPv4 address "93.220.107.30" becomes "01011101.11011100.01101011.00011110". The suffix decides how many bits are fixed. In the CIDR block "93.220.107.30/10", the 10 first bits of the prefix "93.220.107.30"  are "01011101.11xxxxxx.xxxxxxxx.xxxxxxxx". This number span the binary range \\ \{01011101.11111111.11111111.11111111 - 01011101.11000000.00000000.00000000 \}, or the decimal range  \{ 93.192.0.1 - 93.255.255.254 \}. Remark that not the full prefix is needed; "93.220.107.30/10" and "93.220.107.31/10" are the same CIDR  block. Because of this, it is normal to set the changing bits of the prefix to 0, as in: "93.192.0.0/10". 
-Since the sizes of CIDR blocks vary, they can be nested. For example, "93.192.0.0/11" is a part of "93.192.0.0/10".
+Classless Inter-Domain Routing(CIDR) is the modern way to split the IPv4 address space into blocks, so that they can be distributed. A CIDR block can look like this: "93.192.0.0/10". This block has two parts, the prefix "93.192.0.0" and the suffix "/10". The suffix indicates the size of the CIDR block. The prefix indicates where in the IPv4 space the CIDR block is located. To understand this, it is useful to look at an IP address in binary instead of decimal. For example, the IPv4 address "93.220.107.30" becomes "01011101.11011100.01101011.00011110". The suffix decides how many bits are fixed. In the CIDR block "93.220.107.30/10", the 10 first bits of the prefix "93.220.107.30"  are "01011101.11xxxxxx.xxxxxxxx.xxxxxxxx". This number spans the binary range \\ \{01011101.11111111.11111111.11111111 - 01011101.11000000.00000000.00000000 \}, or the decimal range  \{ 93.192.0.1 - 93.255.255.254 \}. Notice that not the full prefix is needed; "93.220.107.30/10" and "93.220.107.31/10" are the same CIDR  block. Because of this, it is normal to set the changing bits of the prefix to 0, as in: "93.192.0.0/10". 
+Since the the size of CIDR blocks vary, they can be nested. For example, "93.192.0.0/11" is a part of "93.192.0.0/10".
 
 

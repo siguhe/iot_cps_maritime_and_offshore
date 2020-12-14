@@ -3,16 +3,16 @@ Shodan is a search engine like Google. Instead of searching for web pages, howev
 
 \subsubsection{Shodan account}
 It is possible to make up to 5 queries using Shodan without registering an account. 
-With a free account, it is possible to perform more queries, access to the Shodan API, and limited access to search filters. However, without a paid account, the website can have limited use.
+With a free account, it is possible to perform more queries, access the Shodan API, and get limited access to search filters. However, without a paid account, the search engine has limitations.
 Using the API, a free user can access up to 100 results from searches. 
-For paid users, there are three payment plans: Freelancer, Small Business and Corporate. A Freelancer user get access to up to 1 million results per month and access to most search filters. 
-Users paying for the higher tiers can get from 20 million to unlimited results, all search filters and multiple extra benefits. 
-The Freelances user will be sufficient for the scope of this project.
+For paid users, there are three payment plans: Freelancer, Small Business and Corporate. A Freelancer user gets access to up to 1 million results per month and access to most search filters. 
+Users paying for the higher tiers can get from 20 million to an unlimited number of results, all search filters and multiple extra benefits. 
+The Freelancer payment plan will be sufficient for the scope of this project.
 
 \subsubsection{Crawlers and banners}
-Shodan have bots called "crawlers" to find information about devices connected to the internet, such as IP address, port number, country, service running, version, protocols used, and more. 
+Shodan has bots called "crawlers" to find information about devices connected to the internet, such as IP address, port number, country, service running, version, protocols used, and more. 
 All these properties are saved in Shodan "banners" . The creator of Shodan, John Matherly has described banners as "A banner is simply metadata about a service.". \cite{banner} 
-Therefore, when a user start a search using the Shodan search engine, it will not return live results, but rather the banners already saved in the Shodan database. Shodan guarantees that returned banners is collected in the last 30 days.\cite{matherly_guide_to_shodan}
+Therefore, when a user starts a search using the Shodan search engine, it will not return live results, but rather the banners already saved in the Shodan database. Shodan guarantees that returned banners have been collected in the last 30 days.\cite{matherly_guide_to_shodan}
 Some of the Shodan banner properties are always on banners, while others are situational. For example will SSL properties only occur on banners of ports that use SSL encryption. A complete list of both required and situational Shodan banner properties can be found in \cref{app:banner_properties}.
 Normally, the banners are in the JSON format. An example of a banner can be found in \cref{app:marlink_banner}.
 Matherly\cite{matherly_guide_to_shodan} describes the basic algorithm for Shodan crawlers as:
@@ -25,20 +25,19 @@ Matherly\cite{matherly_guide_to_shodan} describes the basic algorithm for Shodan
 \end{enumerate}
 The list of ports mentioned can be found by using the API web call in \cref{lst:api_ports}.
 
-
 \subsubsection{Search filters} \label{sec:filters}
 To limit the results returned from a Shodan query, filters are applied. Filters are on the format:
 \begin{lstlisting}
 filter_property: value
 \end{lstlisting}
-When using a filter, Shodan queries will return banners where the properties specified in the filter contain the specified value. In most cases, filter properties correspond with banners. However, some filter properties are not banner properties. For example can the "geo" filter property define an area. The Shodan query will then return all banners where the "location.latitude" and "location.longitude" properties are within this area. A complete list of Shodan filter properties can be found in \cref{app:shodan_filters}.
+When using a filter, Shodan queries will return banners where the properties specified in the filter contain the specified value. In most cases, filter properties correspond with banners. However, some filter properties are not banner properties. For example the "geo" filter property can define an area. The Shodan query will then return all banners where the "location.latitude" and "location.longitude" properties are within this area. 
 
 A comprehensive list of the Shodan filters can be found in \cref{app:shodan_filters}, . The queries used in this project will be explained in more detail. 
 
 \subsection{Previous research}
-Since Shodan was launched in 2009, a lot of research has been put into finding ICS systems using Shodan. The Shodan website even has its own article on the subject.\cite{shodan_ics}  Others have also compiled lists of Shodan queries that will find ICS systems. For example, the website SCADA Strangelove has compiled multiple such lists, focusing on both Supervisory Control And Data Acquisition (SCADA) and ICS devices.\cite{scadasl_cheatsheet} \cite{scadasl_shodan}
+Since Shodan was launched in 2009, a lot of research has been done in order to finding ICS using Shodan. The Shodan website even has its own article on the subject.\cite{shodan_ics} There also exist other lists of Shodan queries that will find ICS systems. For example, the website SCADA Strangelove has compiled multiple such lists, focusing on both Supervisory Control And Data Acquisition (SCADA) and ICS devices.\cite{scadasl_cheatsheet} \cite{scadasl_shodan}
 
-Others focus on the other side of things, where they try to defend ICS against Shodan scans. For example, \textit{Evaluation of the ability of the Shodan search engine to identify Internet-facing industrial control devices} by Bodenheim, Butts, Dunlap and Mullins, \cite{bodenheim_butts_dunlap_mullins_2014} demonstrates how obfuscation can be used to mask ICS devices from Shodan searches. Furthermore, the article implements this project on several honeypots. A honeypot is a computer that is configured to look like another device, in this case an ICS. Then the honeypot will log all traffic. Bodenheim, Butts, Dunlap and Mullins then had an independent researcher try to find the devices using Shodan, showing how the devices were harder to find when obfuscated.
+On the other hand, research exist on ICS defense against Shodan scans. For example, \textit{Evaluation of the ability of the Shodan search engine to identify Internet-facing industrial control devices} by Bodenheim, Butts, Dunlap and Mullins, \cite{bodenheim_butts_dunlap_mullins_2014} demonstrates how obfuscation can be used to mask ICS devices from Shodan searches. Furthermore, the article implemented this on several honeypots. A honeypot is a computer that is configured to look like another device, in this case an ICS. Then the honeypot will log all traffic. Bodenheim, Butts, Dunlap and Mullins had an independent researcher try to find the devices using Shodan, showing how the devices were harder to find when obfuscated.
 
 \newpage
 
