@@ -1,6 +1,5 @@
-\section{Conclusion} \label{sec:conclusion}
-
-The different methods as suggested in \cref{sec:method} and tested in \cref{sec:results} was found to have different strengths and weaknesses. To summarize the most important characteristics of each method:
+\Section{Conclusion} \label{sec:conclusion}
+The different methods suggested in \cref{sec:method} and tested in \cref{sec:results} were found to have different strengths and weaknesses. To summarize the most important characteristics of each method:
 
 \begin{outline}[itemize]
     \setlength\itemsep{10em}
@@ -8,7 +7,7 @@ The different methods as suggested in \cref{sec:method} and tested in \cref{sec:
         \2 Pinpoint an exact device model
         \2 Hard to find identifying device banner
         \1 Internet Service Provider and IP ranges
-        \2 Will give a subset of devices possibly within constraints
+        \2 Will provide a subset of plausible devices
         \1 Reverse IP geolocation
         \2 Does not work
         \1 Latency and traceroute
@@ -16,14 +15,12 @@ The different methods as suggested in \cref{sec:method} and tested in \cref{sec:
 
 \end{outline}
 
-This shows that the process of identifying devices connected to the internet has many different sides, and it takes more than one method to be able to identify a device.
+This shows that the process of identifying devices connected to the internet has many different aspects, and it takes more than one method to be able to identify a device.
 
-Even with these methods, the findings from \cref{sec:results} was either inconclusive or few. Filtering devices on the ISP Marlink proved to find most devices. However, it was difficult to know whether these devices were part of a Cyber-Physical System(CPS) or not. Instead, the number of devices returned would be more useful for a subset to perform further searches on. 
+Even with these methods, the findings from \cref{sec:results} were either inconclusive or few. Filtering devices on the ISP Marlink proved to find most devices. However, it was difficult to know whether these devices were part of a Cyber-Physical System(CPS) or not. Instead, the list of devices returned would be more useful for performing further research. 
 
-On the other hand, the search for "Maritime Stabilized Antenna System" from \cref{sec:banner_results}, give few, but decisive identifications of devices. As stated in \cref{sec:intro}, more devices connected to the internet means that there are more potential vulnerabilities. Therefore, it is good that it is only possible to find a few online devices. These findings should not be seen as conclusive, as only a superficial search was performed, and many devices may still be connected to the internet, but not found by this project. As mentioned in \cref{sec:further_work}, a more thorough search would include automated scripts for either crawling the internet or parsing datasets. 
+The search for "Maritime Stabilized Antenna System" from \cref{sec:banner_results}, gives few, but decisive identifications of devices. As stated in \cref{sec:intro}, the more devices connected to the internet, the higher potential for vulnerabilities. Therefore, it is good that it is possible to find only a few online devices. These findings should not be seen as conclusive, as only a superficial search was performed. Many devices may still be connected to the internet, even though thet were not found by this project. As mentioned in \cref{sec:further_work}, a more thorough search would include automated scripts for either crawling the internet or parsing datasets. 
 
+Using traceroute to identify devices based on latency is not conclusive, but improves the chance that the right devices are found. This is the only tool that Shodan does not provide, which makes it interesting as a supplement. It should be mentioned that when Shodan queries are sent, they are found in a Shodan database. Shodan has made all the connections to find the devices. With traceroute however, a ping is sent from the device that runs the command. The information is real-time, and the IP address of the sender can be read by the device that receives the traceroute ping. It is not illegal to ping a computer available on the public internet, however, the use of Shodan is more anonymous. 
 
-Using traceroute to identify devices based on latency is not conclusive, but improves the chance that the right devices are found. This is the only tool that Shodan does not provide, which makes it interesting as a supplement. It should be mentioned that when Shodan queries is sent, they are found in a Shodan database. Shodan has made all the connections to find the devices. With traceroute however, a ping is sent from the device that runs the command. The information is real-time, and the IP address of the sender can be read by the device that receives the traceroute ping. While it is not illegal to ping a computer available on the public internet, the use of Shodan is more anonymous. 
-
-
-All in all, the main product of this report is the defined methods for identifying devices connected to the internet, while the results from testing these methods should be viewed more as examples than conclusive results. 
+All in all, the main product of this report is to have defined methods for identifying devices connected to the internet, while the results from testing these methods should be concidered as examples rather than conclusive results. 
