@@ -1,5 +1,6 @@
-\section{Conclusion} \label{sec:conclusion}
-The different methods suggested in \cref{sec:method} and tested in \cref{sec:results} were found to have different strengths and weaknesses. To summarize the most important characteristics of each method:
+\subsection{Discussions}
+
+The different methods tested in this chapter were found to have different strengths and weaknesses. To summarize the most important characteristics of each method:
 
 \begin{outline}[itemize]
     \setlength\itemsep{10em}
@@ -19,8 +20,20 @@ This shows that the process of identifying devices connected to the internet has
 
 Even with these methods, the findings from \cref{sec:results} were either inconclusive or few. Filtering devices on the ISP Marlink proved to find most devices. However, it was difficult to know whether these devices were part of a Cyber-Physical System(CPS) or not. Instead, the list of devices returned would be more useful for performing further research. 
 
-The search for "Maritime Stabilized Antenna System" from \cref{sec:banner_results}, gives few, but decisive identifications of devices. As stated in \cref{sec:intro}, the more devices connected to the internet, the higher potential for vulnerabilities. Therefore, it is good that it is possible to find only a few online devices. These findings should not be seen as conclusive, as only a superficial search was performed. Many devices may still be connected to the internet, even though thet were not found by this project. As mentioned in \cref{sec:further_work}, a more thorough search would include automated scripts for either crawling the internet or parsing datasets. 
+The search for "Maritime Stabilized Antenna System" from \cref{sec:banner_results}, gives few, but decisive identifications of devices. As stated in \cref{sec:intro}, the more devices connected to the internet, the higher potential for vulnerabilities. Therefore, it is good that it is possible to find only a few online devices. These findings should not be seen as conclusive, as only a superficial search was performed. Many devices may still be connected to the internet, even though that were not found by this project. As mentioned in \cref{sec:further_work}, a more thorough search would include automated scripts for either crawling the internet or parsing datasets. 
 
 Using traceroute to identify devices based on latency is not conclusive, but improves the chance that the right devices are found. This is the only tool that Shodan does not provide, which makes it interesting as a supplement. It should be mentioned that when Shodan queries are sent, they are found in a Shodan database. Shodan has made all the connections to find the devices. With traceroute however, a ping is sent from the device that runs the command. The information is real-time, and the IP address of the sender can be read by the device that receives the traceroute ping. It is not illegal to ping a computer available on the public internet, however, the use of Shodan is more anonymous. 
 
-All in all, the main product of this report is to have defined methods for identifying devices connected to the internet, while the results from testing these methods should be concidered as examples rather than conclusive results. 
+Even though the Reverse IP Geolocation method from \cref{sec:reverse_results} did not yield any results, it should be mentioned that it could work for other industries, where devices have a permanent location.
+
+
+\section{Conclusion} \label{sec:conclusion}
+This project defined multiple methods for identifying devices connected to the internet, then tested those methods to look for real world devices in Cyber-Physical Systems (CPS) from the maritime and offshore industry.
+
+Reverse Geolocation did not find any such devices, but could possibly be used for other industries. 
+Finding systems by CIDR ranges or ISP filtering as a method is mostly useful for finding subsets of devices that could be relevant. The results when looking for ISP numbers showed that more devices are online in the maritime industry than in the offshore industry. 
+Using banner identification is the only method that can decisively identify devices. However, when this method was tested, it was  hard to find banners that could properly identify devices without access to said devices or prior experience from the relevant industries.
+Measuring traceroute latency to find if the signal travels trough a satellite proved to give good indications to where the device were located. This was especially useful as the focus were on the maritime and offshore industries, which have a lot of devices connected to the internet trough satellites. 
+The methods mentioned in this report could be combined to more more efficiently and accurately find devices.
+
+All in all, the main product of this report is to have defined methods for identifying devices connected to the internet, while the results from testing these methods should be considered as examples rather than conclusive results. 
